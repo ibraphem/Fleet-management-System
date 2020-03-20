@@ -1,0 +1,1 @@
+@include('accident.partials.accident_tbl', ['accidentreport'=>$accidentReport, 'type'=>'datefilter'])

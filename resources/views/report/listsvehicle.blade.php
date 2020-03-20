@@ -1,0 +1,1 @@
+@include('vehicle.partials.vehicle_table', ['vehiclereport'=>$vehicleReport, 'type'=>'datefilter'])
