@@ -18,7 +18,7 @@
 
      @foreach($vehiclereport as $value)
          <tr>
-         <td>{{ $value->acquired_date }}</td>
+         <td>{{date('d M Y', strtotime($value->acquired_date))}}</td>
                 <td>{{ $value->reg_number }}</td>
                 <td>{{ $value->manufacturer }} &nbsp; {{ $value->model }} &nbsp {{ $value->model_year }}</td>
                 <td>&#x20A6;&nbsp;{{ $value->purchase_price }}</td>

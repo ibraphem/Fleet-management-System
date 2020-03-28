@@ -12,7 +12,7 @@
     <tbody>
       @foreach($accidents as $value)
       <tr>
-        <td>{{ $value->accident_date }}</td>
+        <td>{{date('d M Y', strtotime($value->accident_date))}}</td>
         <td>{{$value->vehicleuser['full_name']}}</td>
         <td>{{ $value->vehicle->reg_number}}</td>
         <td>&#8358; {{ $value->repair_cost}}</td>

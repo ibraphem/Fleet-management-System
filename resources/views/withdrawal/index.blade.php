@@ -4,10 +4,10 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{__('Assignments')}}</h1>
+      <h1>{{__('Withdrawals')}}</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
-        <li><a href="#">{{__('Assignment')}}</a></li>
+        <li><a href="#">{{__('Withdrawal List')}}</a></li>
         <li class="active">{{__('All')}}</li>
       </ol>
     </section>
@@ -49,7 +49,7 @@
         <td>{{$value->vehicleuser['full_name']}}</td>
         <td>{{$value->vehicle->reg_number}}</td>
         <td>{{$value->vehicle->manufacturer}}&nbsp;{{$value->vehicle->model}}</td>
-        <td>{{ $value->assignment_date }} - {{ $value->withdrawal_date }} </td>
+        <td>{{date('d M Y', strtotime($value->assignment_date))}}  - {{date('d M Y', strtotime($value->withdrawal_date))}} </td>
 
         <td class="hidden">
         

@@ -52,21 +52,15 @@
 									</div> <br><br>
              
 					
-					<div class="form-group">
-                                        <label for="customer_id" class="col-sm-4 control-label">{{trans('sale.customer')}}</label>
-                                        <div class="col-sm-6 no-margin no-right-padding">
-                                    <select class="form-control select2" name="customer_id" required>
-                                        <option value="">{{__('Select Customer')}}</option>
-                                            @foreach($maintenance_routines as $maintenance_routine)
-                                        <option value="{{$maintenance_routine->id}}" {{($maintenance_routine->title == App\maintenance_routine::GENERAL_MAINTENANCE) ? "selected" : ""}}>{{$maintenance_routine->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    
-                                        </div>
-                                        <div class="col-sm-2 no-margin no-left-padding">
+									<div class="form-group row">
+						{{ Form::label('maintenance_routine', __('Select Ops') .' *',['class'=>'col-sm-3 text-right']) }}
+						<div class="col-sm-7 no-margin no-right-padding">
+						{{ Form::select('maintenance_routine_id', $maintenance_routines, null, array('class' => 'form-control')) }}
+						</div>
+						<div class="col-sm-2 no-margin no-left-padding">
 							<a class="btn btn-success pull-right" href="{{url('maintenances')}}/#modal-id" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp; {{__('Add')}}</a>
 						</div>
-                                    </div>
+					</div>
 					<div class="form-group row">
 					{{ Form::label('maintenance_cost', __('Cost') .' *',['class'=>'col-sm-3 text-right']) }}
 					<div class="col-sm-9"> 

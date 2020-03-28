@@ -52,7 +52,7 @@
                 <select class="form-control select2" name="vehicle_id" required>
                     <option value="">{{__('Select Vehicle')}}</option>
                         @foreach($vehicles as $vehicle)
-                    <option value="{{$vehicle->id}}" {{($vehicle->id) ? 'selected': ''}}>{{$vehicle->reg_number}}</option>
+                    <option value="{{$vehicle->id}}">{{$vehicle->reg_number}}</option>
                         @endforeach
                     </select>
                 

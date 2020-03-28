@@ -17,7 +17,7 @@
         <td>{{$value->vehicleuser['full_name']}}</td>
         <td>{{$value->vehicle['reg_number']}}</td>
         <td>" </td>
-        <td>{{ $value->assignment_date }} - {{ $value->withdrawal_date }} </td>
+        <td>{{date('d M Y', strtotime($value->assignment_date))}}  - {{date('d M Y', strtotime($value->withdrawal_date))}} </td>
 
         <td class="hidden">
         

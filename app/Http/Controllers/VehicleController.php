@@ -76,7 +76,9 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = Vehicle::findOrFail($id);
-        $maintenance = Maintenance::where('vehicle_id', $id)->get();
+        $maintenance = Maintenance::where('status', '=', 1);
+        $maintenance = $maintenance->where('vehicle_id', $id)->get();
+        //$maintenance = $maintenance->where('status', '=', 1)->get();
         $accident = Accident::where('vehicle_id', $id)->get();
         $documents = Document::where('vehicle_id', $id)->get();
         return view('vehicle.show', compact('vehicle', 'maintenance', 'accident', 'documents'));

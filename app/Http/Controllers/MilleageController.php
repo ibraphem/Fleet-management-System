@@ -9,6 +9,7 @@ use App\Milleage;
 use App\Vehicle;
 use App\Vehicleuser;
 use App\Assignment;
+use App\Accident;
 use App\Other;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +31,8 @@ class MilleageController extends Controller
     public function index()
     {   
         $others = Other::all();
-        //$others = $others->where('id', '=', 1)->get();
-        $milleages = Milleage::with('vehicle','vehicleuser', 'assignment')->latest()->get();
+        //$others = $others->where('id', '=', 1)->get(); 
+        $milleages = Milleage::with('vehicle','vehicleuser', 'accident', 'assignment')->latest()->get();
 
         //dd($others);
         
@@ -76,8 +77,17 @@ class MilleageController extends Controller
         //dd($milleage_charge);
         $milleage->vehicle_user_id = $request->vehicle_user_id; 
         $milleage->vehicle_id = $request->vehicle_id;
-        $milleage->month = $request->month;
-        $milleage->year =  $request->year;
+        $milleage->date = $request->date;
+        $date = strtotime($milleage->date);
+        $month = date("m", $date);
+        $year = date("Y", $date);
+        $milleage_year =DB::table('Milleages')
+                                    ->whereRaw('extract(month from date) = ?', [$month])
+                                    ->whereRaw('extract(year from date) = ?', [$year])
+                                    ->count();
+       // dd($milleage_year);
+
+        
         $milleage->milleage_ceiling =  $request->milleage_ceiling;
         $milleage->starting_milleage = $request->starting_milleage;
         $milleage->ending_milleage =  $request->ending_milleage;
@@ -91,6 +101,17 @@ class MilleageController extends Controller
             $milleage->excess_milleage = 0;
             $milleage->excess_milleage_charge = 0;
         }
+
+        $milleage_date =DB::table('Milleages')
+                                    ->where('vehicle_id', '=', $request->vehicle_id)
+                                    ->whereRaw('extract(month from date) = ?', [$month])
+                                    ->whereRaw('extract(year from date) = ?', [$year])
+                                    ->count();
+
+          if($milleage_date > 0){
+            Session::flash('message', __('You have already recorded milleage for this vehicle this month'));
+            return redirect()->back();
+          }                  
         
         $vehicle_assigned_count = DB::table('assignments')
                                     ->where('vehicle_id', '=', $request->vehicle_id)
@@ -104,6 +125,7 @@ class MilleageController extends Controller
         }else{
             Session::flash('message', __('This vehicle was not assigned to the user you chose'));
             return redirect()->back();
+            die();
         }
     }
 
@@ -148,8 +170,7 @@ class MilleageController extends Controller
        
         $milleage->vehicle_user_id = $request->vehicle_user_id; 
         $milleage->vehicle_id = $request->vehicle_id;
-        $milleage->month = $request->month;
-        $milleage->year =  $request->year;
+        $milleage->date = $request->date;
         //dd($milleage->year);
         $milleage->milleage_ceiling =  $request->milleage_ceiling;
        // dd($milleage->milleage_ceiling);

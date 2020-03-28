@@ -22,15 +22,36 @@
             @endif
           <div class="box box-success">
             <div class="box-header">
-              <h3 class="box-title">{{__('Withdrawal List')}}</h3><a class="btn btn-small btn-success pull-right" href="{{ URL::to('assignment/create') }}"><i class="fa fa-plus"></i>&nbsp; {{__('Assign Vehicle')}}</a>
+              <h3 class="box-title">{{__('Assignment List')}}</h3><a class="btn btn-small btn-success pull-right" href="{{ URL::to('assignment/create') }}"><i class="fa fa-plus"></i>&nbsp; {{__('Assign Vehicle')}}</a>
             </div>
           </div>
             <!-- /.box-header -->
             <div class="box box-success">
               <div class="box-header"></div>
             <div class="box-body">
-        
-            @include('assignment.partials.withdraw_table', ['assignments'=>$assignments])
+            @if(!empty($generals))
+<table id="myTable" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>{{__('Vehicle User')}}</th>
+            <th>{{__('Veh. Reg. No')}}</th>
+            <th>{{__('Veh. Brand')}}</th>
+            <th>{{__('Starting Milleage')}}</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+      @foreach($generals as $value)
+      <tr>
+        <td>{{$value->vehicleuser['full_name']}}</td>
+        <td>{{ $value->vehicle->reg_number}}</td>
+        <td>{{ $value->vehicle->manufacturer}} {{ $value->vehicle->model}}</td>
+        <td>{{$value->milleage['starting_milleage']}}</td>
+      </tr>
+      @endforeach
+  </tbody>
+</table>
+@endif
             </div>
             <!-- /.box-body -->
           </div>

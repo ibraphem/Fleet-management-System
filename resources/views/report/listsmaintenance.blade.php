@@ -1,0 +1,1 @@
+@include('maintenance.partials.maintenance_tbl', ['maintenancereport'=>$maintenanceReport, 'type'=>'datefilter'])

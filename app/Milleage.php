@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Milleage extends Model
 {
-    protected $fillable = ['month', 'year', 'vehicle_id', 'vehicle_user_id', 'starting_milleage', 'ending_milleage', 'milleage_ceiling'];
+    protected $fillable = ['date','vehicle_id', 'vehicle_user_id', 'starting_milleage', 'ending_milleage', 'milleage_ceiling'];
 
     public function vehicle()
     {
@@ -18,6 +18,11 @@ class Milleage extends Model
     public function assignment()
     {
         return $this->belongsTo('App\Assignment', 'assignment_id');
+    }
+
+    public function accident()
+    {
+        return $this->belongsTo('App\Accident', 'accident_id');
     }
 
     public function vehicleuser()

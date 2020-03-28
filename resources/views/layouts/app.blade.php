@@ -20,6 +20,11 @@
 	@yield('page-style')
 	<!-- Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+	@if(!empty(setting('fevicon_path')))
+        <link rel="icon" href="{{asset(setting('fevicon_path'))}}"  />
+	@else
+		<link rel="icon" href="{{asset('images/logo-top.png')}}"  />
+	@endif
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

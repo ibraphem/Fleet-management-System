@@ -1,10 +1,14 @@
 <?php namespace App\Http\Controllers;
 
-use App\Item, App\Customer, App\Sale;
-use App\Supplier, App\Receiving, App\User;
+
+use App\Maintenance;
+use App\Assignment;
+use App\Accident;
+use App\Document;
+use App\Vehicle;
+use App\Vehicleuser;
 use App;
-use App\Account;
-use App\Expense;
+
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -37,111 +41,34 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $aitems = Item::where('type', 1)->get();
-        $items = $aitems->count();
-        $stock_limit_items = [];
-        foreach($aitems as $item) {
-            if ($item->quantity <= $item->stock_limit || $this->checkExpire($item->expire_date)) {
-                $stock_limit_items[] = $item;
-            } 
-           
-        }
-        $aexpenses = Expense::with('expense_category')->latest()->get();
-        $expenses = $aexpenses->count();
-        $expense_pay = $aexpenses->sum('payment');
-        $expense_due = $aexpenses->sum('dues');
+        
 
-        $customers = Customer::count();
-        $suppliers = Supplier::count();
+        $vehicleusers = Vehicleuser::count();
 
-        $areceivings = Receiving::all();
-        $receivings = $areceivings->count();
-        $receiving_pay = $areceivings->sum('payment');
-        $receiving_dues = $areceivings->sum('dues');
+        $vehicles = Vehicle::count();
 
-        $total_exp = $expense_pay + $receiving_pay;
-        $exp_dues = $expense_due + $receiving_dues;
+        $accidentals = Accident::count();
 
-        $asales = Sale::where('status', '!=', 0)->latest()->get();
-        $sales = $asales->count();
-        $total_sales = $asales->sum('payment');
-        $income_dues = $asales->sum('dues');
-        $latest_incomes = $asales;
+        $schedule_maintenances = Maintenance::where('status', '=', 0)->with('vehicle','maintenance_routine')->orderBy('schedule_date', 'ASC')->get();
 
-        $employees = User::count();
-        $incomeexpensechart = $this->incomeExpenseChart(15);
+        $assignments = Assignment::where('status', '=', "active")->with('vehicle','vehicleuser')->orderBy('assignment_date', 'ASC')->get();
 
-        $accounts = Account::latest()->paginate(7);
+        $accidents = Accident::with('vehicle','vehicleuser')->orderBy('accident_date', 'ASC')->get();
+
+        $documents = Document::with('vehicle','vehicleuser')->orderBy('expiry_date', 'ASC')->get();
+
+       
 
         return view('home')
-            ->with('items', $items)
-            ->with('expenses', $expenses)
-            ->with('aexpenses', $aexpenses)
-            ->with('customers', $customers)
-            ->with('suppliers', $suppliers)
-            ->with('receivings', $receivings)
-            ->with('sales', $sales)
-            ->with('employees', $employees)
-            ->with('incomeexpensechart', $incomeexpensechart)
-            ->with('totalincome', $total_sales)
-            ->with('income_dues', $income_dues)
-            ->with('exp_dues', $exp_dues)
-            ->with('accounts', $accounts)
-            ->with('latest_incomes', $latest_incomes)
-            ->with('total_exp', $total_exp)
-            ->with('stock_limit_items', $stock_limit_items);
+            ->with('schedule_maintenances', $schedule_maintenances)
+            ->with('vehicles', $vehicles)
+            ->with('accidentals', $accidentals)
+            ->with('vehicleusers', $vehicleusers)
+            ->with('accidents', $accidents)
+            ->with('documents', $documents)
+            ->with('assignments', $assignments);
+            
     }
 
-    public function checkExpire($expire_date)
-    {
-        $result = false;
-        if (!empty($expire_date)) {
-            $now_date = Carbon::now();
-            $expire = Carbon::parse($expire_date)->toDateString();
-            $diff = $now_date->diffInDays($expire, false);
-            if ($diff <= 0) {
-                $result = true;
-            }
-        }
-        return $result;
-    }
-
-    public function test()
-    {
-        return view('layouts.admin');
-    }
-
-    private function getDatesOfWeek($total_days)
-    {
-        $days = array();
-        for ($i=0; $i>= -($total_days-1); $i--) {
-            $days[] = date("Y-m-d", strtotime($i.' days'));
-        }
-        return $days;
-    }
-
-    public function incomeExpenseChart($total_days)
-    {
-        $daysOfWeek = $this->getDatesOfWeek($total_days);
-        // dd($daysOfWeek);
-        $incomes = Sale::whereBetween('created_at', [ $daysOfWeek[($total_days - 1)].' 00:00:00', $daysOfWeek[0].' 23:59:59'])->get();
-        $expenses = Receiving::whereBetween('created_at', [ $daysOfWeek[($total_days - 1)].' 00:00:00', $daysOfWeek[0].' 23:59:59'])->get();
-        //  dd($expenses);
-        $chartArray = array();
-        foreach ($daysOfWeek as $day) {
-            $weeklyincome = "0";
-            $weeklyexpense = "0";
-            $weeklyincome = $incomes->whereBetween('created_at', [ $day.' 00:00:00', $day.' 23:59:59'])->count();//Sale::whereBetween('created_at', [ $day.' 00:00:00', $day.' 23:59:59'])->count();
-            $weeklyexpense = $expenses->whereBetween('created_at', [ $day.' 00:00:00', $day.' 23:59:59'])->count();;//Receiving::whereBetween('created_at', [ $day.' 00:00:00', $day.' 23:59:59'])->count();
-            $chart = [
-                'y' => $day,
-                'a' => $weeklyexpense,
-                'b'=>$weeklyincome,
-            ];
-            $chartArray[] =  $chart;
-        }
-        // dd($chartArray);
-        return $chartArray;
-    }
 
 }

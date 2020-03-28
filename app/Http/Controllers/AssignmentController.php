@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Vehicleuser;
 use App\Vehicle;
 use App\Assignment;
+use App\Accident;
+use App\Document;
+use App\Milleage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -25,7 +28,7 @@ class AssignmentController extends Controller
     public function index()
     {
        // $assignments = Assignment::with('vehicle','vehicleuser')->latest()->get();
-       $assignments = Assignment::where('status', '=', "active")->with('vehicle','vehicleuser')->latest()->get();
+       $assignments = Assignment::where('status', '=', "active")->with('vehicle','vehicleuser', 'accident', 'document', 'milleage')->orderBy('assignment_date', 'ASC')->get();
        //dd($assignments);
         return view('assignment.index', compact('assignments')); 
 

@@ -36,13 +36,13 @@
                     </tr>
                 </thead>
                 <tbody>
-    @foreach($vehicle as $value)
+    @foreach($vehicle as $value) 
         <tr>
           <td>{{ $value->reg_number }}</td>
           <td class="hidden-xs">{{ $value->manufacturer }}</td>
           <td class="hidden-xs">{{ $value->model }}</td>
           <td class="hidden-xs">{{ $value->model_year }}</td>
-          <td>{{ $value->acquired_date }}</td>
+          <td>{{date('d M Y', strtotime($value->acquired_date))}}</td>
           <td>&#8358; {{ $value->purchase_price }}</td>
           <td class="hidden-xs">{{ $value->location }}</td>
           <td class="item_btn_group">

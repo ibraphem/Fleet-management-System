@@ -34,8 +34,8 @@
     <thead>
         <tr>
             <th>{{__('Title')}}</th>
-            <th>{{__('Acquired_date')}}</th>
-            <th>{{__('expiry_date')}}</th>
+            <th>{{__('Acquired date')}}</th>
+            <th>{{__('Expiry date')}}</th>
             <th>{{__('Vehicle User')}}</th>
             <th>{{__('Veh. Reg. No')}}</th>
             <th>{{__('Cost')}}</th>
@@ -46,8 +46,8 @@
       @foreach($documents as $value)
       <tr>
         <td>{{ $value->title }}</td>
-        <td>{{ $value->acquired_date }}</td>
-        <td>{{ $value->expiry_date }}</td>
+        <td>{{date('d M Y', strtotime($value->acquired_date))}}</td>
+        <td>{{date('d M Y', strtotime($value->expiry_date))}}</td>
         <td>{{$value->vehicleuser['full_name']}}</td>
         <td>{{ $value->vehicle->reg_number}}</td>
         <td>&#8358; {{ $value->cost}}</td>

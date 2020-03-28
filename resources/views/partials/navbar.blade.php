@@ -1,10 +1,29 @@
-<header class="main-header">
-    <!-- Logo -->
+<header class="main-header" >
+<a href="/" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini">
+        @if(!empty(DB::table('flexible_pos_settings')->first()->fevicon_path))
+        <img src="{{asset(DB::table('flexible_pos_settings')->first()->fevicon_path)}}" alt="" height="40px" width="40px">
+        @else
+        <img src="{{asset('images/fevicon.png')}}" alt="" height="40px" width="40px">
+        @endif
+
+      </span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg" >
+          @if(!empty(DB::table('flexible_pos_settings')->first()->logo_path))
+        <img src="{{asset(DB::table('flexible_pos_settings')->first()->logo_path)}}" alt="" height="45px" width="78">
+        @else
+        <img src="{{asset('images/fpos.png')}}" alt="" height="45px" width="78">
+        @endif        
+        </span>
+
+    </a>
     
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"> 
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -26,7 +45,21 @@
           @if(auth()->user())
           <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('maintenance.create')}}"><i class="fa fa-credit-card" aria-hidden="true"></i> {{__('Do Maintenance')}}</a></li>
           @endif
-          
+          @if(auth()->user())
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('schedulemaintenance.create')}}"><i class="fa fa-credit-card" aria-hidden="true"></i> {{__('Schedule Maintenance')}}</a></li>
+          @endif
+          @if(auth()->user())
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('milleage.create')}}"><i class="fa fa-recycle" aria-hidden="true"></i> {{__('Record Milleage')}}</a></li>
+          @endif
+          @if(auth()->user())
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('accident.create')}}"><i class="fa fa-shield" aria-hidden="true"></i> {{__('Record Accident')}}</a></li>
+          @endif
+          @if(auth()->user())
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('fuel.create')}}"><i class="fa fa-building" aria-hidden="true"></i> {{__('Record Fueling')}}</a></li>
+          @endif
+          @if(auth()->user())
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('document.create')}}"><i class="fa fa-book" aria-hidden="true"></i> {{__('Add Document')}}</a></li>
+          @endif
         </ul>
       
       <div class="navbar-custom-menu">
@@ -47,12 +80,11 @@
 
                 <p>
                   {{ Auth::user()->name }}
-                  <small>{{__('Member since')}} {{Auth::user()->created_at->format('Y-m-d')}}</small>
                 </p>
               </li>
               <!-- Menu Body -->
               <li class="user-body">
-                <div class="row">
+             <!--   <div class="row">
                   <div class="col-xs-6 text-center">
                     @if(Auth::user()->hasPermissionTo('flexiblepossetting.create'))
                     <a href="{{route('flexiblepossetting.create')}}">{{__('Settings')}}</a>
@@ -64,7 +96,7 @@
                       @endif
                   </div>
 
-                </div>
+                </div>-->
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->

@@ -6,18 +6,19 @@
             <th>{{__('Vehicle User')}}</th>
             <th>{{__('Veh. Reg. No')}}</th>
             <th>{{__('Veh. Brand')}}</th>
-           
-      
+         
             <th>{{__('Actions')}}</th>
         </tr>
     </thead>
     <tbody>
       @foreach($assignments as $value)
       <tr>
-        <td>{{ $value->assignment_date }}</td>
+        <td>{{date('d M Y', strtotime($value->assignment_date))}}</td> 
         <td>{{$value->vehicleuser['full_name']}}</td>
         <td>{{ $value->vehicle->reg_number}}</td>
         <td>{{ $value->vehicle->manufacturer}} {{ $value->vehicle->model}}</td>
+
+        
         
 
         <td class="item_btn_group">
@@ -49,7 +50,7 @@
                        </div>
                      </div>
                    </div>
-          <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Delete assignment">{{ Form::open(array('url' => 'assignment/' . $value->id, 'class' => 'form-inline')) }}
+         <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Delete assignment">{{ Form::open(array('url' => 'assignment/' . $value->id, 'class' => 'form-inline')) }}
                   {{ Form::hidden('_method', 'DELETE') }}
                   {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
                   {{ Form::close() }}</button></a>

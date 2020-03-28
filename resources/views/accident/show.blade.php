@@ -31,7 +31,7 @@
               <b>{{__('Registration Number')}} </b> <a class="pull-right">{{$vehicle->reg_number}}</a>
             </li>
             <li class="list-group-item hidden-print">
-              <b>{{__('Accident Date')}} </b> <a class="pull-right">{{$accident->accident_date}}</a>
+              <b>{{__('Accident Date')}} </b> <a class="pull-right">{{date('d M Y', strtotime($accident->accident_date))}}</a>
             </li>
             <li class="list-group-item hidden-print">
               <b>{{__('Accident Time')}} </b> <a class="pull-right">{{$accident->time}}</a>

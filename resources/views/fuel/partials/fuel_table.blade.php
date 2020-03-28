@@ -13,7 +13,7 @@
     <tbody>
       @foreach($fuels as $value)
       <tr>
-        <td>{{ $value->fuel_date }}</td>
+        <td>{{date('d M Y', strtotime($value->fuel_date))}}</td>
         <td>{{ $value->vehicle->reg_number }}</td>
         <td>{{ $value->vehicle->manufacturer}}&nbsp;{{ $value->vehicle->model}}</td>
         <td>{{ $value->vehicleuser['full_name'] }}</td>

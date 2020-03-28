@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Accidentreport;
-use App\Accident;
+use App\Maintenancetreport;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Maintenance;
 use \Auth, \Redirect;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
-class AccidentreportController extends Controller
+
+class MaintenancereportController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function __construct()
     {
         $this->middleware('auth');
@@ -37,22 +38,23 @@ class AccidentreportController extends Controller
         //
     }
 
-    public function getAccident()
+    public function getMaintenance()
     {
-        $accidentReport = Accident::pluck('created_at');
-        //dd($accidentReport);
-        return view('report.getaccident')->with('accidentReport', $accidentReport);
+        $maintenanceReport = Maintenance::pluck('created_at');
+        //dd($maintenanceReport);
+        return view('report.getmaintenance')->with('maintenanceReport', $maintenanceReport);
     }
 
-    public function getAccidentReport(Request $request)
+    public function getMaintenanceReport(Request $request)
     {
         //dd("nonsense");
         if ($request->ajax()) {
-           // dd("nonsense");
-            $accidentReport = Accident::where('accident_date', '>=', $request->DateCreated);
-            $accidentReport = $accidentReport->where('accident_date', '<=', $request->EndDate)->get();
-            //dd($accidentReport);
-            return view('report.listsaccident')->with('accidentReport', $accidentReport); 
+            //dd("nonsense");
+            $maintenanceReport = Maintenance::where('maintenance_date', '>=', $request->DateCreated);
+            $maintenanceReport = $maintenanceReport->where('maintenance_date', '<=', $request->EndDate);
+            $maintenanceReport = $maintenanceReport->where('status', '=', 1)->get();
+            //dd($maintenanceReport);
+            return view('report.listsmaintenance')->with('maintenanceReport', $maintenanceReport);
         }
     }
 
@@ -70,10 +72,10 @@ class AccidentreportController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Accidentreport  $accidentreport
+     * @param  \App\Maintenancetreport  $maintenancetreport
      * @return \Illuminate\Http\Response
      */
-    public function show(Accidentreport $accidentreport)
+    public function show(Maintenancetreport $maintenancetreport)
     {
         //
     }
@@ -81,10 +83,10 @@ class AccidentreportController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Accidentreport  $accidentreport
+     * @param  \App\Maintenancetreport  $maintenancetreport
      * @return \Illuminate\Http\Response
      */
-    public function edit(Accidentreport $accidentreport)
+    public function edit(Maintenancetreport $maintenancetreport)
     {
         //
     }
@@ -93,10 +95,10 @@ class AccidentreportController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Accidentreport  $accidentreport
+     * @param  \App\Maintenancetreport  $maintenancetreport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Accidentreport $accidentreport)
+    public function update(Request $request, Maintenancetreport $maintenancetreport)
     {
         //
     }
@@ -104,10 +106,10 @@ class AccidentreportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Accidentreport  $accidentreport
+     * @param  \App\Maintenancetreport  $maintenancetreport
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Accidentreport $accidentreport)
+    public function destroy(Maintenancetreport $maintenancetreport)
     {
         //
     }

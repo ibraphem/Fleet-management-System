@@ -19,7 +19,7 @@ class Vehicle extends Model
         $this->manufacturer = $data['manufacturer'];
         $this->model = $data['model'];
         $this->acquired_date = $data['acquired_date'];
-        $this->company = $data['company'];
+       // $this->company = $data['company'];
         $this->model_year = (isset($data['model_year'])) ? $data['model_year'] : "";
         $this->purchase_price = (isset($data['purchase_price'])) ? $data['purchase_price'] : "";
         $this->life = (isset($data['life'])) ? $data['life'] : "";

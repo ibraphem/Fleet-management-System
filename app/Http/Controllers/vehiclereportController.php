@@ -49,7 +49,7 @@ class vehiclereportController extends Controller
             $vehicleReport = $vehicleReport->where('acquired_date', '<=', $request->EndDate)->get();
            // $vehicleReport = Vehicle::all()->whereBetween('created_at', [ $request->DateCreated.' 00:00:00', $request->EndDate.' 23:59:59'])->get();
           //  dd($vehicleReport);
-            return view('report.listsvehicle')->with('vehicleReport', $vehicleReport);
+            return view('report.listsvehicle')->with('vehicleReport', $vehicleReport); 
         }
     }
 
@@ -93,7 +93,7 @@ class vehiclereportController extends Controller
      */
     public function edit(vehiclereport $vehiclereport)
     {
-        //
+        // 
     }
 
     /**

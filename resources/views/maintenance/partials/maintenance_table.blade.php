@@ -13,7 +13,7 @@
     <tbody>
       @foreach($maintenances as $value)
       <tr>
-        <td>{{ $value->maintenance_date }}</td>
+       <td>{{date('d M Y', strtotime($value->maintenance_date))}}</td>
         <td>{{ $value->maintenance_routine->title }}</td>
         <td>{{ $value->vehicle->reg_number}}</td>
         <td>{{ $value->maintenance_cost }}</td>

@@ -18,7 +18,7 @@
 
      @foreach($accidentreport as $value)
          <tr>
-            <td>{{ $value->accident_date }}</td>
+            <td>{{date('d M Y', strtotime($value->accident_date))}}</td>
             <td>{{$value->vehicleuser['full_name']}}</td>
             <td>{{ $value->vehicle->reg_number}}</td>
             <td>{{ $value->vehicle->manufacturer }} &nbsp; {{ $value->vehicle->model }} &nbsp {{ $value->vehicle->model_year }}</td>

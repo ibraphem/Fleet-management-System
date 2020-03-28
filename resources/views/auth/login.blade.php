@@ -3,6 +3,9 @@
 @section('content')
 <div class="login-background"></div>
 <div class="login-box">
+
+  <!-- /.login-logo -->
+  <div class="login-box-body">
   <div class="login-logo">
     <a href="#">
 @if(!empty(setting('logo_path')))
@@ -12,10 +15,8 @@
         @endif
 
     </a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-  <p class="login-box-msg">{{__('Sign in to start your session')}}</p>
+  </div><br><br>
+  <b><p class="login-box-msg" style="color:green">{{__('Sign in to start your session')}}</p></b>
 	@if (count($errors) > 0)
 		<div class="alert alert-danger">
 		<strong>Whoops!</strong> {{__('There were some problems with your input.')}}<br><br>
@@ -38,11 +39,7 @@
       </div>
       <div class="row">
         <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> {{__('Remember Me')}}
-            </label>
-          </div>
+          
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
@@ -56,8 +53,7 @@
     </div>
     <!-- /.social-auth-links -->
 
-	<a href="{{ route('password.request') }}">{{__('I forgot my password')}}</a><br>
-    {{--<a href="{{ url('/register') }}" class="text-center">Register a new membership</a>--}}
+
 
   </div>
   <!-- /.login-box-body -->

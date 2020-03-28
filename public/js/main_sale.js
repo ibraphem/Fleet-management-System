@@ -87,6 +87,39 @@ $(function () {
         }
     });
 
+       // for date wise maintenance filtering
+       $("#bStartDate, #bEndDate").datepicker({
+        changeMonth:true,
+        changeYear:true,
+        yearRange:'1970:+0',
+        dateFormat:'yy-mm-dd',
+        onSelect:function(dateText){
+            var DateCreated = $('#bStartDate').val();
+           // console.log(DateCreated);
+            var EndDate = $('#bEndDate').val();
+            var inputData = {DateCreated:DateCreated,EndDate:EndDate};
+            var url = "/reports/getmaintenancereport";
+            getReports(inputData, url, "list-of-maintenance")
+        }
+    });
+
+        // for date wise sales filtering
+        $("#gStartDate, #gEndDate").datepicker({
+            changeMonth:true,
+            changeYear:true,
+            yearRange:'1970:+0',
+            dateFormat:'yy-mm-dd',
+            onSelect:function(dateText){
+                var DateCreated = $('#gStartDate').val();
+                var EndDate = $('#gEndDate').val();
+                var inputData = {DateCreated:DateCreated,EndDate:EndDate};
+                var url = "/reports/getgeneralreports";
+                getReports(inputData, url, "list-general-report")
+            }
+        });
+    
+   
+
     // for date wise sales filtering
     $("#lStartDate, #lEndDate").datepicker({
         changeMonth:true,
@@ -104,6 +137,38 @@ $(function () {
 
 });
 
+
+
+/*
+
+$(".monthPicker").datepicker({
+    dateFormat: 'mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+
+    onClose: function(dateText, inst) {
+        var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+        var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+        $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+        console.log(month)
+        console.log(year)
+    }
+
+    
+});
+
+
+$(".monthPicker").focus(function () {
+    $(".ui-datepicker-calendar").hide();
+    $("#ui-datepicker-div").position({
+        my: "center top",
+        at: "center bottom",
+        of: $(this)
+    });
+});
+
+*/
 
 function getReports(inputData, url, appendId)
 {

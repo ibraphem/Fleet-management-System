@@ -11,7 +11,7 @@ class MaintenanceRoutine extends Model
 
     public function maintenance()
     {
-    	return $this->hasMany('App\maintenance');
+    	return $this->hasMany('App\maintenance')->where('status', '=', 1);
     }
 
     public function getAll()

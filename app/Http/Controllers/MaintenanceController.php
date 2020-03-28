@@ -24,8 +24,9 @@ class MaintenanceController extends Controller
     }
 
     public function index()
-    {
-        $maintenances = Maintenance::with('vehicle','maintenance_routine')->latest()->get();
+    {   
+        $maintenances = Maintenance::where('status', '=', 1)->with('vehicle','maintenance_routine')->latest()->get();
+        //$maintenances = Maintenance::with('vehicle','maintenance_routine')->latest()->get();
         return view('maintenance.index', compact('maintenances'));
 
      
@@ -59,6 +60,7 @@ class MaintenanceController extends Controller
         $maintenance->maintenance_cost = $request->maintenance_cost;
         $maintenance->maintenance_date = $request->maintenance_date;
         $maintenance->remark =  $request->remark;
+        $maintenance->status = 1;
         $maintenance->save();
         Session::flash('message', __('Maintenance carried out successfully'));
         return redirect('maintenance');
@@ -108,6 +110,7 @@ class MaintenanceController extends Controller
         $maintenance->maintenance_cost = $request->maintenance_cost;   
         $maintenance->maintenance_date = $request->maintenance_date;
         $maintenance->remark =  $request->remark;
+        $maintenance->status = 1;
         $maintenance->update();
         //dd($maintenance);
         Session::flash('message', __('Maintenance updated successfully'));

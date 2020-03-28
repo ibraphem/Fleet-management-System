@@ -59,14 +59,14 @@
 <table id="myTable" class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th class="hidden-xs">{{__('Period')}}</th>
-            <th class="hidden-xs">{{__('Vehicle User')}}</th>
-            <th width="80">{{__('Vehicle')}}</th>
-            <th width="80">{{__('Starting Milleage')}}</th>
-            <th width="80">{{__('Ending Milleage')}}</th>
-            <th width="80">{{__('Milleage Used')}}</th>
-            <th width="80">{{__('Milleage Ceiling')}}</th>
-            <th width="80">{{__('Excess Milleage')}}</th>
+            <th>{{__('Date')}}</th>
+            <th>{{__('Vehicle User')}}</th>
+            <th>{{__('Vehicle')}}</th>
+            <th>{{__('Starting Milleage')}}</th>
+            <th>{{__('Ending Milleage')}}</th>
+            <th>{{__('Milleage Used')}}</th>
+            <th>{{__('Milleage Ceiling')}}</th>
+            <th>{{__('Excess Milleage')}}</th>
             <th width="80">Excess Milleaage Charge (&#8358;)</th>
          
             <th>{{__('Actions')}}</th>
@@ -75,15 +75,15 @@
     <tbody>
       @foreach($milleages as $value)
       <tr>
-        <td class="hidden-xs">{{date('M', mktime(0, 0, 0, $value->month, 10))}} &nbsp; {{ $value->year }}</td> 
-        <td class="hidden-xs">{{$value->vehicleuser['full_name']}}</td>
-        <td width="80">{{ $value->vehicle->reg_number}}</td>
-        <td width="80">{{$value->starting_milleage}}</td>
-        <td width="80">{{$value->ending_milleage}}</td>
-        <td width="80">{{$value->milleage_used}}</td>
-        <td width="80">{{$value->milleage_ceiling}}</td>
-        <td width="80">{{$value->excess_milleage}}</td>
-        <td width="80">{{$value->excess_milleage_charge}}</td>
+        <td>{{date('M Y', strtotime($value->Date))}}</td> 
+        <td>{{$value->vehicleuser['full_name']}}</td>
+        <td>{{ $value->vehicle->reg_number}}</td>
+        <td>{{$value->starting_milleage}}</td>
+        <td>{{$value->ending_milleage}}</td>
+        <td>{{$value->milleage_used}}</td>
+        <td>{{$value->milleage_ceiling}}</td>
+        <td>{{$value->excess_milleage}}</td>
+        <td>{{$value->excess_milleage_charge}}</td>
         
         <td class="item_btn_group">
         <a href="{{ url('milleage/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Edit milleage record"></span></button></a>&nbsp;

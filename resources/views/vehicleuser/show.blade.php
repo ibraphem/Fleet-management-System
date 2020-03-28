@@ -67,9 +67,8 @@ if (trim($vehicle_user->avatar) != 'no-foto.png') {
           <table class="table table-hover table-striped">
             <thead>
               <tr>
-                
+              <th>{{__('Date')}}</th>
                 <th>{{__('Reg. Number')}}</th>
-                <th>{{__('Brand')}}</th>
                 <th>{{__('Cost')}} (&#8358;)</th>
                
               </tr>
@@ -77,9 +76,8 @@ if (trim($vehicle_user->avatar) != 'no-foto.png') {
             <tbody>
               @foreach($fuels as $fuel)
               <tr>
-                
+                <td>{{date('d M Y', strtotime($fuel->fuel_date))}}</td>
                 <td>{{ $fuel->vehicle->reg_number}}</td>
-                <td>{{ $fuel->vehicle->manufacturer}} &nbsp;{{ $fuel->vehicle->model}}</td>
                 <td>{{ $fuel->fuel_cost}}</td>
               </tr>
               @endforeach
@@ -110,7 +108,7 @@ if (trim($vehicle_user->avatar) != 'no-foto.png') {
         <table id="myTable" class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>{{__('Period')}}</th>
+            <th>{{__('Date')}}</th>
           
             <th>{{__('Vehicle')}}</th>
             
@@ -122,7 +120,7 @@ if (trim($vehicle_user->avatar) != 'no-foto.png') {
     <tbody>
       @foreach($milleages as $value)
       <tr>
-        <td>{{date('M', mktime(0, 0, 0, $value->month, 10))}} &nbsp; {{ $value->year }}</td> 
+      <td>{{date('d M Y', strtotime($value->Date))}}</td>
        
         <td>{{ $value->vehicle->reg_number}}</td>
         
@@ -161,9 +159,9 @@ if (trim($vehicle_user->avatar) != 'no-foto.png') {
                 <td>{{ $assignment->vehicle->reg_number}}</td>
                 <td>{{ $assignment->vehicle->manufacturer}} &nbsp;{{ $assignment->vehicle->model}}</td>
                 @if($assignment->withdrawal_date != null)
-                <td>{{$assignment->assignment_date}} To {{$assignment->withdrawal_date}} </td>
+                <td>{{date('d M Y', strtotime($assignment->assignment_date))}} - {{date('d M Y', strtotime($assignment->withdrawal_date))}} </td>
                 @else
-                  <td>{{$assignment->assignment_date}} - {{'Till date'}} </td>
+                  <td>{{date('d M Y', strtotime($assignment->assignment_date))}} - {{'Till date'}} </td>
                 
                 @endif
               </tr>

@@ -41,7 +41,7 @@ if (trim($vehicle->avatar) != 'no-foto.png') {
               <b>{{__('Purchase Price')}} </b> <a class="pull-right">&#8358; {{$vehicle->purchase_price}}</a>
             </li>
             <li class="list-group-item">
-              <b>{{__('Acquired date')}} </b> <a class="pull-right">{{$vehicle->acquired_date}}</a>
+              <b>{{__('Acquired date')}} </b> <a class="pull-right">{{date('d M Y', strtotime($vehicle->acquired_date))}}</a>
             </li>
             <li class="list-group-item hidden-print">
               <b>{{__('Life Span')}} </b> <a class="pull-right">{{$vehicle->life}} years</a>
@@ -78,7 +78,7 @@ if (trim($vehicle->avatar) != 'no-foto.png') {
               <tr>
                 
                 <td>{{ $document->title}}</td>
-                <td>{{ $document->expiry_date}}</td>
+                <td>{{date('d M Y', strtotime($document->expiry_date))}}</td>
               </tr>
               @endforeach
               <tr>
