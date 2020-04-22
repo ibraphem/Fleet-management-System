@@ -25,8 +25,9 @@ class MaintenanceController extends Controller
 
     public function index()
     {   
-        $maintenances = Maintenance::where('status', '=', 1)->with('vehicle','maintenance_routine')->latest()->get();
+        $maintenances = Maintenance::where('status', '=', 1)->with('vehicle','maintenance_routine')->get();
         //$maintenances = Maintenance::with('vehicle','maintenance_routine')->latest()->get();
+     //   dd($maintenances);
         return view('maintenance.index', compact('maintenances'));
 
      

@@ -26,12 +26,12 @@
                 <thead>
                     <tr>
                         <th>Reg. Number</th>
-                        <th width="50" class="hidden-xs">Manufacturer</th>
-                        <th width="50" class="hidden-xs">Model</th>
-                        <th width="70" class="hidden-xs">Model Year</th>
+                        <th>Manufacturer</th>
+                        <th>Model</th>
+                        <th>Model Year</th>
                         <th>Acquired date</th>
                         <th>Purchase Price</th>
-                        <th width="50" class="hidden-xs">Location</th>
+                        <th>OPS Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -39,12 +39,12 @@
     @foreach($vehicle as $value) 
         <tr>
           <td>{{ $value->reg_number }}</td>
-          <td class="hidden-xs">{{ $value->manufacturer }}</td>
-          <td class="hidden-xs">{{ $value->model }}</td>
-          <td class="hidden-xs">{{ $value->model_year }}</td>
+          <td>{{ $value->manufacturer }}</td>
+          <td>{{ $value->model }}</td>
+          <td>{{ $value->model_year }}</td>
           <td>{{date('d M Y', strtotime($value->acquired_date))}}</td>
           <td>&#8358; {{ $value->purchase_price }}</td>
-          <td class="hidden-xs">{{ $value->location }}</td>
+          <td>{{ $value->condition }}</td>
           <td class="item_btn_group">
           <a href="{{ url('vehicles/' . $value->id . '/') }}"><button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="View vehicle info."><i class="fa fa-eye"></i></button></a> &nbsp;
           <a href="{{ url('vehicles/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Edit Vehicle"></span></button></a> &nbsp;

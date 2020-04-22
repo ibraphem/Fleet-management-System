@@ -14,8 +14,9 @@
       @foreach($maintenances as $value)
       <tr>
        <td>{{date('d M Y', strtotime($value->maintenance_date))}}</td>
-        <td>{{ $value->maintenance_routine->title }}</td>
+       <td>{{ $value->maintenance_routine->title }}</td>
         <td>{{ $value->vehicle->reg_number}}</td>
+        
         <td>{{ $value->maintenance_cost }}</td>
         <td>{{$value->remark}}</td> 
         <td class="item_btn_group">

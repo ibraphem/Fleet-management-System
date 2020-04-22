@@ -55,7 +55,7 @@ class HomeController extends Controller
 
         $accidents = Accident::with('vehicle','vehicleuser')->orderBy('accident_date', 'ASC')->get();
 
-        $documents = Document::with('vehicle','vehicleuser')->orderBy('expiry_date', 'ASC')->get();
+        $documents = Document::with('vehicle','vehicleuser')->orderBy('acquired_date', 'ASC')->get();
 
        
 

@@ -119,7 +119,7 @@
     <div class="col-md-4">
         <div class="box box-success single-latest">
             <div class="box-header with-border">
-                <h4 style="color: green;">{{__('Document Expiring Soon')}}</h4>
+                <h4 style="color: green;">{{__('Recent Documents')}}</h4>
             </div>
             <div class="box-body">
                 <table class="table table-striped">
