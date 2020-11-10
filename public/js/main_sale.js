@@ -67,7 +67,7 @@ $(function () {
             var DateCreated = $('#StartDate').val();
             var EndDate = $('#EndDate').val();
             var inputData = {DateCreated:DateCreated,EndDate:EndDate};
-            var url = "/reports/getvehiclereport";
+            var url = "/report/getvehiclereport";
             getReports(inputData, url, "list-of-vehicle")
         }
     });
@@ -82,7 +82,7 @@ $(function () {
             var DateCreated = $('#aStartDate').val();
             var EndDate = $('#aEndDate').val();
             var inputData = {DateCreated:DateCreated,EndDate:EndDate};
-            var url = "/reports/getaccidentreport";
+            var url = "/report/getaccidentreport";
             getReports(inputData, url, "list-of-accident")
         }
     });
@@ -98,7 +98,7 @@ $(function () {
            // console.log(DateCreated);
             var EndDate = $('#bEndDate').val();
             var inputData = {DateCreated:DateCreated,EndDate:EndDate};
-            var url = "/reports/getmaintenancereport";
+            var url = "/report/getmaintenancereport";
             getReports(inputData, url, "list-of-maintenance")
         }
     });
@@ -113,7 +113,7 @@ $(function () {
                 var DateCreated = $('#gStartDate').val();
                 var EndDate = $('#gEndDate').val();
                 var inputData = {DateCreated:DateCreated,EndDate:EndDate};
-                var url = "/reports/getgeneralreports";
+                var url = "/report/getgeneralreports";
                 getReports(inputData, url, "list-general-report")
             }
         });

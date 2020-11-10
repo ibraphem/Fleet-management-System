@@ -4,7 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\vehicle;
-use App\Maintenanceroutine;
+use App\MaintenanceRoutine;
+use App\Document;
+use App\VehiclePaper;
 
 class Maintenance extends Model
 {
@@ -17,6 +19,16 @@ class Maintenance extends Model
 
     public function maintenance_routine()
     {
-    	return $this->belongsTo('App\MaintenanceRoutine');
+    	return $this->belongsTo('App\MaintenanceRoutine', 'maintenance_routine_id');
+    }
+
+    public function document()
+    {
+        return $this->belongsTo('App\Document');
+    }
+
+    public function vehiclePaper()
+    {
+        return $this->belongsTo('App\VehiclePaper');
     }
 }

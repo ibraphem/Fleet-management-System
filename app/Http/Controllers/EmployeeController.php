@@ -115,8 +115,9 @@ class EmployeeController extends Controller
                 }
                 $users->save();
                 // redirect
-                Session::flash('message', __('You have successfully updated employee'));
-                return Redirect::to('employees');
+                Session::flash('message', __('You have successfully updated your profile'));
+               // return Redirect::to('employees');
+               return Redirect::back();
             }
         }
     }

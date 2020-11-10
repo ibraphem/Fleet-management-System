@@ -1,1 +1,1 @@
-@include('vehicle.partials.vehicle_table', ['vehiclereport'=>$vehicleReport, 'type'=>'datefilter'])
+@include('vehicle.partials.vehicle_table', ['vehiclereport'=>$vehicleReport, 'from'=>$from, 'to'=>$to, 'type'=>'datefilter'])

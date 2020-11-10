@@ -76,6 +76,7 @@ class AccidentController extends Controller
             return redirect('accident');
             }else{
                 Session::flash('message', __('This vehicle was not assigned to the user you chose'));
+                Session::flash('alert-class', 'alert-danger');
                 return redirect()->back();
             }
     }

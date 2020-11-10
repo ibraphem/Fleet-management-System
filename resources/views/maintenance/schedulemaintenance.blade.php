@@ -64,22 +64,21 @@
                              {{ Form::text('remark', null, ['class'=>'form-control','placeholder'=>'Remarks']) }}<br><br>
                            </div>
                              
-                           <div class="form-group">
-                             {{ Form::submit('Complete', ['class'=>'btn btn-success']) }}
+                           <div class="modal-footer">
+                             {{ Form::submit('Complete', ['class'=>'btn btn-warning pull-left']) }}
+                              <button type="button" class="btn btn-success" data-dismiss="modal">{{__('Close')}}</button>
                            </div>
                            {{ Form::close() }}
                          </div>
-                         <div class="modal-footer">
-                           <button type="button" class="btn btn-success" data-dismiss="modal">{{__('Close')}}</button>
-                         </div>
+                        
                        </div>
                      </div>
                    </div>
         <a href="{{ url('schedulemaintenance/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Edit maintenance schedule"></span></button> &nbsp;
-          <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete maintenance schedule">{{ Form::open(array('url' => 'schedulemaintenance/' . $value->id, 'class' => 'form-inline')) }}
+      {{--    <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete maintenance schedule">{{ Form::open(array('url' => 'schedulemaintenance/' . $value->id, 'class' => 'form-inline')) }}
                   {{ Form::hidden('_method', 'DELETE') }}
                   {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
-                  {{ Form::close() }}</button></a>
+                  {{ Form::close() }}</button></a> --}}
          
         </td>
       </tr>

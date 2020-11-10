@@ -22,10 +22,10 @@
         <td>{{$value->ending_milleage}}</td> 
         <td class="item_btn_group">
         <a href="{{ url('milleage/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span></button></a> &nbsp;
-        <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm">{{ Form::open(array('url' => 'milleage/' . $value->id, 'class' => 'form-inline')) }}
+{{--<a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm">{{ Form::open(array('url' => 'milleage/' . $value->id, 'class' => 'form-inline')) }}
         {{ Form::hidden('_method', 'get') }}
-                  {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
-                  {{ Form::close() }}</button></a>
+                  {{ Form::submit(trans('X'), array('class' => 'delete-btn')) --}}
+                  {{ Form::close() }}</button></a> --}}
         </td>
       </tr>
       @endforeach

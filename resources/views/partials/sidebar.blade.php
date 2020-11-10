@@ -39,7 +39,7 @@
           <ul class="treeview-menu">
               @if(auth())
               <li>
-                  <a href="{{ url('/maintenanceroutine') }}"><i class="fa fa-circle-o"></i> <span>{{trans('Maint. Routine')}}</span></a>
+                  <a href="{{ url('/maintenanceroutine') }}"><i class="fa fa-circle-o"></i> <span>{{trans('Parts')}}</span></a>
               </li>
               @endif
               @if(auth())
@@ -57,7 +57,7 @@
       @endif
       @if(auth())
               <li>
-                  <a href="{{ url('/milleage') }}"><i class="fa fa-recycle"></i> <span>{{trans('Milleage')}}</span></a>
+                  <a href="{{ url('/milleage') }}"><i class="fa fa-recycle"></i> <span>{{trans('Mileage')}}</span></a>
               </li>
      @endif
      @if(auth())
@@ -70,11 +70,25 @@
                   <a href="{{ url('/fuel') }}"><i class="fa fa-building"></i> <span>{{trans('Fuel')}}</span></a>
               </li>
      @endif
-     @if(auth())
+     @if(auth()->user())
+      <li class="treeview">
+          <a href="#"><i class="fa fa-book"></i> <span>{{trans('Document')}}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+          <ul class="treeview-menu">
+            @if(auth())
               <li>
-                  <a href="{{ url('/document') }}"><i class="fa fa-book"></i> <span>{{trans('Document')}}</span></a>
+                  <a href="{{ url('/document') }}"><i class="fa fa-circle-o"></i> Document List</a>
               </li>
-     @endif
+              @endif
+              @if(auth())
+              <li>
+                  <a href="{{ url('/vehiclepaper') }}"><i class="fa fa-circle-o"></i> Vehicle Paper</a>
+              </li>
+              @endif
+             
+          </ul>
+      </li>
+      @endif
+     
      @if(auth()->user())
       <li class="treeview">
           <a href="#"><i class="fa fa-file-o"></i> <span>{{trans('Reports')}}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -92,13 +106,15 @@
                   <a href="{{ url('reports/getmaintenance') }}"><i class="fa fa-circle-o"></i>Maintenance</a>
               </li>
               <li>
-                  <a href="{{ url('reports/generalreport') }}"><i class="fa fa-circle-o"></i>General</a>
+                  <a href="{{ url('reports/generalreport') }}"><i class="fa fa-circle-o"></i>Monthly</a>
               </li>
               @endif
           </ul>
       </li>
       @endif
-    
+      @if(auth()->user()->hasPermissionTo('employees.index') && auth()->user()->hasPermissionTo('assaign.roles'))
+        <li class="{{(Request::is('employees')) ? 'active' : ''}}"><a href="{{ url('/employees') }}"><i class="fa fa-user"></i> <span>{{trans('menu.employees')}}</span></a></li>
+      @endif
     
     </ul>
 </section>

@@ -54,17 +54,26 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         $this->validator($request->all())->validate();
+        
         // store
         $vehicles = new Vehicle;
-        $vehicles->saveVehicle($request->all());
+        $vehicle_exist = Vehicle::where('reg_number', $request->reg_number)->exists();
+        if($vehicle_exist){
+            Session::flash('message', __('This vehicle already exist'));
+            Session::flash('alert-class', 'alert-danger');
+            return Redirect()->back(); 
+        } else{
+            $vehicles->saveVehicle($request->all());
 
-        // process image
-        $image = $request->file('avatar');
-        if (isset($image)) {
-            $vehicles->saveVehicleAvatar($image);
+            // process image
+            $image = $request->file('avatar');
+            if (isset($image)) {
+                $vehicles->saveVehicleAvatar($image);
+            }
+            Session::flash('message', __('You have successfully added a vehicle'));
+            return Redirect()->back();
         }
-        Session::flash('message', __('You have successfully added a vehicle'));
-        return Redirect()->back();
+        
     }
 
     /**

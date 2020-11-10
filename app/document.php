@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\vehicle;
 use App\vehicleuser;
 use App\Assignment;
+use App\VehiclePaper;
 
 class document extends Model
 {
@@ -19,5 +20,10 @@ class document extends Model
     public function vehicleuser()
     {
     	return $this->belongsTo('App\Vehicleuser', 'vehicle_user_id');
+    }
+
+    public function vehiclePaper()
+    {
+        return $this->belongsTo('App\VehiclePaper');
     }
 }

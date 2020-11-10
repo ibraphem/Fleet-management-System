@@ -16,6 +16,10 @@ class Vehicle extends Model
     public function saveVehicle(Array $data)
     {
         $this->reg_number = $data['reg_number'];
+        $this->assetid = $data['assetid'];
+        $this->engine_number = $data['engine_number'];
+        $this->chassis_number = $data['chassis_number'];
+        $this->colour = $data['colour'];
         $this->manufacturer = $data['manufacturer'];
         $this->model = $data['model'];
         $this->acquired_date = $data['acquired_date'];

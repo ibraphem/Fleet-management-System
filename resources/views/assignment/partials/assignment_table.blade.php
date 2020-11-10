@@ -50,10 +50,10 @@
                        </div>
                      </div>
                    </div>
-         <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Delete assignment">{{ Form::open(array('url' => 'assignment/' . $value->id, 'class' => 'form-inline')) }}
+     {{--    <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Delete assignment">{{ Form::open(array('url' => 'assignment/' . $value->id, 'class' => 'form-inline')) }}
                   {{ Form::hidden('_method', 'DELETE') }}
                   {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
-                  {{ Form::close() }}</button></a>
+                  {{ Form::close() }}</button></a> --}}
          
         </td>
       </tr>

@@ -41,11 +41,18 @@ class HomeController extends Controller
      */
     public function index()
     {
+     
         
+        $year = date('Y');
+        $month = date('m');
 
         $vehicleusers = Vehicleuser::count();
 
         $vehicles = Vehicle::count();
+
+        $assignments = Assignment::count();
+
+        $unallocated_vehicles = $vehicles - $assignments;
 
         $accidentals = Accident::count();
 
@@ -55,7 +62,9 @@ class HomeController extends Controller
 
         $accidents = Accident::with('vehicle','vehicleuser')->orderBy('accident_date', 'ASC')->get();
 
-        $documents = Document::with('vehicle','vehicleuser')->orderBy('acquired_date', 'ASC')->get();
+        $documents = Document::whereYear('expiry_date', '=', $year);
+        $documents = $documents->whereMonth('expiry_date', '=', $month);
+        $documents = $documents->orderBy('expiry_date', 'ASC')->get();
 
        
 
@@ -66,6 +75,7 @@ class HomeController extends Controller
             ->with('vehicleusers', $vehicleusers)
             ->with('accidents', $accidents)
             ->with('documents', $documents)
+            ->with('unallocated_vehicles', $unallocated_vehicles)
             ->with('assignments', $assignments);
             
     }

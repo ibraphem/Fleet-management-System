@@ -38,6 +38,18 @@ if (trim($vehicle->avatar) != 'no-foto.png') {
               <b>{{__('Registration Number')}} </b> <a class="pull-right">{{$vehicle->reg_number}}</a>
             </li>
             <li class="list-group-item hidden-print">
+              <b>{{__('Asset ID')}} </b> <a class="pull-right">{{$vehicle->assetid}}</a>
+            </li>
+            <li class="list-group-item hidden-print">
+              <b>{{__('Engine Number')}} </b> <a class="pull-right">{{$vehicle->engine_number}}</a>
+            </li>
+            <li class="list-group-item hidden-print">
+              <b>{{__('Chassis Number')}} </b> <a class="pull-right">{{$vehicle->chassis_number}}</a>
+            </li>
+            <li class="list-group-item hidden-print">
+              <b>{{__('Colour')}} </b> <a class="pull-right">{{$vehicle->colour}}</a>
+            </li>
+            <li class="list-group-item hidden-print">
               <b>{{__('Purchase Price')}} </b> <a class="pull-right">&#8358; {{$vehicle->purchase_price}}</a>
             </li>
             <li class="list-group-item">
@@ -47,10 +59,10 @@ if (trim($vehicle->avatar) != 'no-foto.png') {
               <b>{{__('Life Span')}} </b> <a class="pull-right">{{$vehicle->life}} years</a>
             </li>
             <li class="list-group-item hidden-print">
-              <b>{{__('Location')}} </b> <a class="pull-right">{{$vehicle->location}}</a>
+              <b>{{__('Company')}} </b> <a class="pull-right">{{$vehicle->location}}</a>
             </li>
             <li class="list-group-item hidden-print">
-              <b>{{__('condition')}} </b> <a class="pull-right">{{$vehicle->condition}}</a>
+              <b>{{__('Ops Status')}} </b> <a class="pull-right">{{$vehicle->condition}}</a>
             </li>
           </ul>
       </div>
@@ -99,6 +111,20 @@ if (trim($vehicle->avatar) != 'no-foto.png') {
       <div class="box box-success">
         <div class="box-header with-border">
           <h3 class="box-title">{{__('Maintenance History')}}</h3>
+          <form action="{{route('report.getexpense')}}" method="post">
+              <input type="hidden" name="eid" value="{{$vehicle->id}}">
+    
+              {{csrf_field()}}
+              <button type="submit" class="btn btn-warning pull-left">{{__('Expenses Report')}}</button>
+          </form>
+
+
+          <form action="{{route('vehicle.report')}}" method="post"> 
+              <input type="hidden" name="id" value="{{$vehicle->id}}">
+    
+              {{csrf_field()}}
+              <button type="submit" class="btn btn-info pull-right">{{__('Maintenance Report')}}</button>
+          </form> <br> <br> <br>
           <div>
            @include('maintenance.partials.maintenance_table', ['maintenances'=>$maintenance])
           

@@ -49,7 +49,7 @@
           <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('schedulemaintenance.create')}}"><i class="fa fa-credit-card" aria-hidden="true"></i> {{__('Schedule Maintenance')}}</a></li>
           @endif
           @if(auth()->user())
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('milleage.create')}}"><i class="fa fa-recycle" aria-hidden="true"></i> {{__('Record Milleage')}}</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('milleage.create')}}"><i class="fa fa-recycle" aria-hidden="true"></i> {{__('Record Mileage')}}</a></li>
           @endif
           @if(auth()->user())
           <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('accident.create')}}"><i class="fa fa-shield" aria-hidden="true"></i> {{__('Record Accident')}}</a></li>

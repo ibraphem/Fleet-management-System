@@ -46,10 +46,10 @@
           <td class="item_btn_group">
           <a href="{{ url('vehicleusers/' . $value->id . '/') }}"><button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="View user info."><i class="fa fa-eye"></i></button></a> &nbsp;
           <a href="{{ url('vehicleusers/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Update user record"></span></button></a> &nbsp;
-          <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete user">{{ Form::open(array('url' => 'vehicleusers/' . $value->id, 'class' => 'form-inline')) }}
+        {{--  <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete user">{{ Form::open(array('url' => 'vehicleusers/' . $value->id, 'class' => 'form-inline')) }}
                   {{ Form::hidden('_method', 'DELETE') }}
                   {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
-                  {{ Form::close() }}</button></a>
+                  {{ Form::close() }}</button></a> --}}
           </td>
 
 

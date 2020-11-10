@@ -45,7 +45,7 @@
     <tbody>
       @foreach($documents as $value)
       <tr>
-        <td>{{ $value->title }}</td>
+        <td>{{ $value->vehiclepaper->title }}</td>
         <td>{{date('d M Y', strtotime($value->acquired_date))}}</td>
         <td>{{date('d M Y', strtotime($value->expiry_date))}}</td>
         <td>{{$value->vehicleuser['full_name']}}</td>
@@ -55,10 +55,10 @@
 
         <td class="item_btn_group">
         <a href="{{ url('document/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"  data-toggle="tooltip" data-placement="top" title="Update document record"><span class="glyphicon glyphicon-edit"></span></button></a> &nbsp;
-          <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Update record">{{ Form::open(array('url' => 'document/' . $value->id, 'class' => 'form-inline')) }}
+      {{--    <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Update record">{{ Form::open(array('url' => 'document/' . $value->id, 'class' => 'form-inline')) }}
                   {{ Form::hidden('_method', 'DELETE') }}
                   {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
-                  {{ Form::close() }}</button></a>
+                  {{ Form::close() }}</button></a> --}}
          
         </td>
       </tr>

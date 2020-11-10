@@ -1,10 +1,10 @@
-@extends('layouts.admin')
+@extends('layouts.manage')
 
 @section('content')
-  <div class="content-wrapper">
+<div class="content-wrapper" id="app">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{__('Maintenances')}}</h1>
+      <h1>{{__('Maintenance')}}</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
         <li><a href="#">{{__('Maintenance')}}</a></li>
@@ -13,32 +13,50 @@
     </section>
     <!-- Main content -->
     <section class="content">
-      <div class="row">
+    <div class="row">
         <div class="col-xs-12">
-            <!-- /.box-header -->
-          <!-- /.box -->
             @if (Session::has('message'))
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
             @endif
-          <div class="box box-success">
+            <div class="box box-success">
             <div class="box-header">
-              <h3 class="box-title">{{__('Maintenance List')}}</h3><a class="btn btn-small btn-success pull-right" href="{{ URL::to('maintenance/create') }}"><i class="fa fa-plus"></i>&nbsp; {{__('Do Maintenance')}}</a>
+   
+              
+              <a class="btn btn-small btn-success pull-right" href="{{ URL::to('maintenance/create') }}"><i class="fa fa-plus"></i>&nbsp; {{__('Add Maintenance')}}</a>
+          
             </div>
           </div>
-            <!-- /.box-header -->
+            
+          
             <div class="box box-success">
               <div class="box-header"></div>
             <div class="box-body">
-            @include('maintenance.partials.maintenance_table', ['maintenances'=>$maintenances])
+         
+                    
+                  
+                    <table class="table table-striped table-bordered" id="myTable">
+                        <thead>
+                        <tr>
+                          <th>{{__('Part')}}</th>
+                          <th>{{__('Veh. Reg')}}</th>
+                          <th>{{__('Maint. Date')}}</th>
+                          <th>{{__('Cost')}}</th>
+                          <th>{{__('remarks')}}</th>
+                          <th>{{__('Actions')}}</th>
+                        
+                        </tr>
+                        </thead>
+
+                    </table>
+                  
+                </div>
             </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+    </div>
+
+   
     </section>
-    <!-- /.content -->
-  </div>
+    
+</div>
+
 @endsection

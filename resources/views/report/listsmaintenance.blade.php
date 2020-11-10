@@ -1,1 +1,1 @@
-@include('maintenance.partials.maintenance_tbl', ['maintenancereport'=>$maintenanceReport, 'type'=>'datefilter'])
+@include('maintenance.partials.maintenance_tbl', ['maintenanceReport'=>$maintenanceReport, 'type'=>'datefilter'])

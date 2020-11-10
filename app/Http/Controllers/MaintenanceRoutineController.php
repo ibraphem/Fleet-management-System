@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Vehicle;
+use App\Maintenance;
 use App\MaintenanceRoutine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -17,7 +17,7 @@ class MaintenanceRoutineController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth'); 
     }
 
     public function index()
@@ -58,12 +58,15 @@ class MaintenanceRoutineController extends Controller
      * @param  \App\MaintenanceRoutine  $maintenanceRoutine
      * @return \Illuminate\Http\Response
      */
-    public function show( $id)
-    {
-        $maintenanceroutine = MaintenanceRoutine::with('maintenance', 'maintenance.vehicle', 'maintenance.maintenance_routine')->where('id', $id)->first();
-        $maintenance_routines = MaintenanceRoutine::latest()->get();
-        return view('maintenance.maintenanceroutine', compact('maintenanceroutine', 'maintenance_routines'));
-    }
+        public function show($id)
+        {   
+            
+            $maintenance_routine = MaintenanceRoutine::findOrFail($id);
+            $maintenance = Maintenance::where('maintenance_routine_id', $id)->get();
+            
+            return view('maintenance.parts', compact('maintenance_routine', 'maintenance')); 
+        }
+
 
     /**
      * Show the form for editing the specified resource.

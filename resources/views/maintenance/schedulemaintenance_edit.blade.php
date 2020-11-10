@@ -56,7 +56,7 @@
              
 					
 					<div class="form-group row">
-						{{ Form::label('maintenance_routine', __('Select Ops') .' *',['class'=>'col-sm-3 text-right']) }}
+						{{ Form::label('maintenance_routine', __('Select Part') .' *',['class'=>'col-sm-3 text-right']) }}
 						<div class="col-sm-7 no-margin no-right-padding">
 						{{ Form::select('maintenance_routine_id', $maintenance_routines, null, array('class' => 'form-control')) }}
 						</div>

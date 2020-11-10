@@ -4,10 +4,10 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{__('Milleages')}}</h1>
+      <h1>{{__('Mileage')}}</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
-        <li><a href="#">{{__('Milleage')}}</a></li>
+        <li><a href="#">{{__('Mileage')}}</a></li>
         <li class="active">{{__('All')}}</li>
       </ol>
     </section>
@@ -22,7 +22,7 @@
             @endif
           <div class="box box-success">
             <div class="box-header">
-              <h5 class="box-title" style="color:green">Excess milleage charge is currently set at &#8358;@foreach($others as $value){{$value->cost}}@endforeach <a href="#" data-toggle="modal" data-target="#myModal{{1}}"> Click here to change appropiately.</a></h5><a class="btn btn-small btn-success pull-right" href="{{ URL::to('milleage/create') }}"><i class="fa fa-plus"></i>&nbsp; {{__('Record Milleage')}}</a>
+              <h5 class="box-title" style="color:green">Excess mileage charge is currently set at &#8358;@foreach($others as $value){{$value->cost}}@endforeach <a href="#" data-toggle="modal" data-target="#myModal{{1}}"> Click here to change appropiately.</a></h5><a class="btn btn-small btn-success pull-right" href="{{ URL::to('milleage/create') }}"><i class="fa fa-plus"></i>&nbsp; {{__('Record Mileage')}}</a>
             </div>
           </div>
           <div class="modal fade" id="myModal{{1}}" role="dialog">
@@ -30,7 +30,7 @@
        <div class="modal-content">
          <div class="modal-header">
            <button type="button" class="close" data-dismiss="modal">&times;</button>
-           <h4 class="modal-title">{{__('New excess milleage charge')}}</h4>
+           <h4 class="modal-title">{{__('New excess mileage charge')}}</h4>
          </div>
          <div class="modal-body">
            {{ Form::open(['route'=>'milleage.costchange']) }}
@@ -59,17 +59,17 @@
 <table id="myTable" class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>{{__('Date')}}</th>
-            <th>{{__('Vehicle User')}}</th>
+            <th style="width:50px">{{__('Month')}}</th>
+            <th style="width:120px">{{__('Vehicle User')}}</th>
             <th>{{__('Vehicle')}}</th>
-            <th>{{__('Starting Milleage')}}</th>
-            <th>{{__('Ending Milleage')}}</th>
-            <th>{{__('Milleage Used')}}</th>
-            <th>{{__('Milleage Ceiling')}}</th>
-            <th>{{__('Excess Milleage')}}</th>
-            <th width="80">Excess Milleaage Charge (&#8358;)</th>
+            <th>{{__('Starting Mileage')}}</th>
+            <th>{{__('Ending Mileage')}}</th>
+            <th>{{__('Mileage Used')}}</th>
+            <th>{{__('Mileage Ceiling')}}</th>
+            <th>{{__('Excess Mileage')}}</th>
+            <th width="80">Excess Mileaage Charge (&#8358;)</th>
          
-            <th>{{__('Actions')}}</th>
+            <th style="width:30px">{{__('Actions')}}</th>
         </tr>
     </thead>
     <tbody>
@@ -86,11 +86,11 @@
         <td>{{$value->excess_milleage_charge}}</td>
         
         <td class="item_btn_group">
-        <a href="{{ url('milleage/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Edit milleage record"></span></button></a>&nbsp;
-        <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete milleage record">{{ Form::open(array('url' => 'milleage/' . $value->id, 'class' => 'form-inline')) }}
+        <a href="{{ url('milleage/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Edit mileage record"></span></button></a>&nbsp;
+     {{--   <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete milleage record">{{ Form::open(array('url' => 'milleage/' . $value->id, 'class' => 'form-inline')) }}
         {{ Form::hidden('_method', 'delete') }}
                   {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
-                  {{ Form::close() }}</button></a>
+                  {{ Form::close() }}</button></a> --}}
         </td>
       </tr>
       @endforeach

@@ -67,10 +67,11 @@ class FuelController extends Controller
 //dd($vehicle_assigned_count);
 if($vehicle_assigned_count > 0){
 $fuel->save();
-Session::flash('message', __('Fuel recorded successfully'));
+Session::flash('message', __('Fueling recorded successfully'));
 return redirect('fuel');
 }else{
 Session::flash('message', __('This vehicle was not assigned to the user you chose'));
+Session::flash('alert-class', 'alert-danger');
 return redirect()->back();
 }
         

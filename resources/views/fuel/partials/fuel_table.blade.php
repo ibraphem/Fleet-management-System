@@ -20,10 +20,10 @@
         <td>{{$value->fuel_cost}}</td> 
         <td class="item_btn_group">
         <a href="{{ url('fuel/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"  data-toggle="tooltip" data-placement="top" title="Update fueling record"><span class="glyphicon glyphicon-edit"></span></button> &nbsp;
-          <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete record">{{ Form::open(array('url' => 'fuel/' . $value->id, 'class' => 'form-inline')) }}
+       {{--   <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete record">{{ Form::open(array('url' => 'fuel/' . $value->id, 'class' => 'form-inline')) }}
                   {{ Form::hidden('_method', 'DELETE') }}
                   {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
-                  {{ Form::close() }}</button></a>
+                  {{ Form::close() }}</button></a> --}}
          
         </td>
       </tr>

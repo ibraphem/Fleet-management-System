@@ -11,39 +11,60 @@
         <div class="row"> 
             <div class="col-md-12">
                 <div class="panel panel-default">
-                  <!--  <nav class="multineed navbar navbar-default menu-export" role="navigation">
+                    <nav class="multineed navbar navbar-default menu-export" role="navigation">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-mail-forward"></i> {{__('Export')}} <span class="caret"></span></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-mail-forward"></i> {{__('Export/Print')}} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#" id="excel" class="excel"><i class="fa fa-file-excel-o"></i> {{__('To Excel')}}</a></li>
-                                    <li><a href="#" class="word"><i class="fa fa-file-word-o"></i> {{__('To Word')}}</a></li>
-                                    <li><a href="#" class="pdf"><i class="fa fa-file-pdf-o"></i> {{__('To PDF')}}</a></li>
+                                    <li><a href="#" onclick="exportTableToCSV('Vehicle Report.csv')" id="excel" class="excel" style="color:#006600"><i class="fa fa-file-excel-o"></i> {{__('To Excel')}}</a></li>
+                                    <li><a href="#" onclick="display()" class="word" style="color:blue"><i class="fa fa-print"></i> {{__('To Print')}}</a></li>
                                 </ul>
                             </li>
                         </ul>
-                    </nav> -->
+                    </nav> 
                     <div class="panel-heading" style="padding-top: 6px;">{{trans('Report')}} - {{trans('Vehicle Report')}}</div>
 
                     <div class="panel-body">
-                        <div class="row">
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label >{{__('From')}}</label>
-                                    <input type="text" name="StartDate" id="StartDate" class="form-control" required />
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="EndDate">{{__('To')}}</label>
-                                    <input type="text" name="EndDate" id="EndDate" class="form-control" required />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="list-of-vehicle"></div>
-                    </div>
+    <div class="row" id="form">
+        <form name="vehicleform" id="vehicleform">
+        @csrf
+            <div class="col-md-3">
+                <div class="form-group">
+                <label >{{__('From')}}</label>
+                    <input type="date" name="from" id="from" class="form-control" required />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                <label >{{__('To')}}</label>
+                    <input type="date" name="to" id="to" class="form-control" required />
+                </div>
+            </div>
+             <div class="col-md-2">
+                <div class="form-group">
+                    <p>&nbsp;</p>
+                    <input type="radio" name="company" id="overland" value="Overland"  checked/>&nbsp; &nbsp; OverLand
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <p>&nbsp;</p>
+                    <input type="radio" name="company" id="landover" value="Landover"  />&nbsp; &nbsp; Landover
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+           
+                    <p>&nbsp;</p>
+                    <input type="submit"  name="fetch" class="btn btn-success btn-md" value="Fetch" id="fetch" class="form-control" />
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div id="list-of-vehicles"></div>
+    </div>
+                   
                 </div>
             </div>
         </div>
@@ -51,7 +72,30 @@
 </div>
 @endsection
 @section('script')
-    <script type="text/javascript">
 
+<script type="text/javascript">
+        $(document).ready(function(){  
+     $('#vehicleform').on("submit", function(event){ 
+         
+        event.preventDefault();         
+        $.ajax({  
+             url:"/reports/vehicle",  
+             method:"POST",  
+             data:$('#vehicleform').serialize(),  
+             beforeSend:function(){  
+                  $('#fetch').val("Fetching...");  
+             },
+             success:function(data){ 
+                $('#fetch').val("Fetch");
+                $('#form').hide();
+              $('#list-of-vehicles').html(data);  
+                     }  
+                });                     
+             
+     })
+        
+  })
     </script>
+
+
 @endsection

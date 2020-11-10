@@ -22,11 +22,11 @@
                 @if($user->hasPermissionTo('employees.create'))
               <a class="btn btn-small btn-primary pull-right left-margin-10" href="{{ URL::to('employees/create') }}"><i class="fa fa-plus"></i> {{trans('employee.new_employee')}}</a>
                 @endif
-                @if($user->hasPermissionTo('employeerole.create'))
+        {{--        @if($user->hasPermissionTo('employeerole.create'))
                 <a class="btn btn-small btn-success pull-right left-margin-10" href="#createRole" data-toggle="modal"><i class="fa fa-plus"></i> {{__('Create Role')}}</a>
                 @endif
                 <a class="btn btn-small btn-info pull-right left-margin-10" href="{{route('permissions.list')}}" data-toggle="modal"><i class="fa fa-plus"></i> {{__('Permissions')}}</a>
-
+                --}}
             </div>
           </div>
             <!-- /.box-header -->

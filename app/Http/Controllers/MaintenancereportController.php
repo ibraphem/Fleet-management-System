@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Maintenancetreport;
+use App\Maintenancereport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Maintenance;
+use App\Vehicle;
 use \Auth, \Redirect;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -47,15 +47,27 @@ class MaintenancereportController extends Controller
 
     public function getMaintenanceReport(Request $request)
     {
-        //dd("nonsense");
-        if ($request->ajax()) {
-            //dd("nonsense");
-            $maintenanceReport = Maintenance::where('maintenance_date', '>=', $request->DateCreated);
-            $maintenanceReport = $maintenanceReport->where('maintenance_date', '<=', $request->EndDate);
-            $maintenanceReport = $maintenanceReport->where('status', '=', 1)->get();
-            //dd($maintenanceReport);
-            return view('report.listsmaintenance')->with('maintenanceReport', $maintenanceReport);
-        }
+       
+            $from = $request->from;
+            $to = $request->to;
+            $company = $request->company;
+            $maintenanceReport = DB::table('maintenances')->where('status', '=', '1')
+            ->join('vehicles', 'maintenances.vehicle_id', '=', 'vehicles.id')
+            ->join('maintenance_routines', 'maintenances.maintenance_routine_id', '=', 'maintenance_routines.id')
+            ->where('vehicles.location', $request->company)
+            ->whereBetween('maintenances.maintenance_date', array($request->from, $request->to))
+            ->select('maintenances.*', 'vehicles.*', 'maintenance_routines.*')
+            ->orderBy('maintenance_date', 'ASC')
+            ->get();
+          // dd($maintenanceReport);
+            return view('report.listsmaintenance')
+            ->with('maintenanceReport', $maintenanceReport)
+            ->with('from', $from)
+            ->with('to', $to)
+            ->with('company', $company);
+
+        
+    
     }
 
     /**

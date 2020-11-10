@@ -44,23 +44,34 @@
                                     <select class="form-control select2" name="vehicle_id" required>
                                         <option value="">{{__('Select Vehicle')}}</option>
                                             @foreach($vehicles as $vehicle)
-                                        <option value="{{$vehicle->id}}" {{($vehicle->id) ? 'selected': ''}}>{{$vehicle->reg_number}}</option>
+											<option value="{{$vehicle->id}}">{{$vehicle->reg_number}}</option>
+                                       
                                             @endforeach
                                         </select>
                                     
                                         </div>
 									</div> <br><br>
-             
-					
-									<div class="form-group row">
-						{{ Form::label('maintenance_routine', __('Select Ops') .' *',['class'=>'col-sm-3 text-right']) }}
-						<div class="col-sm-7 no-margin no-right-padding">
-						{{ Form::select('maintenance_routine_id', $maintenance_routines, null, array('class' => 'form-control')) }}
-						</div>
-						<div class="col-sm-2 no-margin no-left-padding">
+
+									<div class="form-group">
+                                        <label for="Parts" class="col-sm-3 control-label">{{trans('Parts')}} *</label>
+                                        <div class="col-sm-7 no-margin no-right-padding">
+                                    <select class="form-control select2" name="maintenance_routine_id" required>
+                                        <option value="">{{__('Select Part')}}</option>
+                                            @foreach($maintenance_routines as $maintenance_routine)
+                                        <option value="{{$maintenance_routine['id']}}" {{($maintenance_routine['id']) ? 'selected': ''}}>{{$maintenance_routine['title']}}</option>
+                                            @endforeach
+                                        </select>
+                                    
+                                        </div>
+                                        <div class="col-sm-2 no-margin no-left-padding">
 							<a class="btn btn-success pull-right" href="{{url('maintenances')}}/#modal-id" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp; {{__('Add')}}</a>
 						</div>
-					</div>
+									</div> <br><br>
+             
+					
+							
+							
+
 					<div class="form-group row">
 					{{ Form::label('maintenance_cost', __('Cost') .' *',['class'=>'col-sm-3 text-right']) }}
 					<div class="col-sm-9"> 

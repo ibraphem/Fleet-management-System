@@ -61,26 +61,33 @@
         </div>
     </div>
     @endif
-    <div class="col-md-4">
-        <div class="box box-success single-latest">
+    @if(!empty($documents))
+   <div class="col-md-12">
+        <div class="box box-success">
             <div class="box-header with-border">
-                <h4 style="color: blue;">{{__('Recent Deployment')}}</h4>
+                <h4 style="color:red;">{{__('Documents expiring this month')}}</h4>
             </div>
             <div class="box-body">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>{{__('Date')}}</th>
-                            <th>{{__('Veh. Reg. No')}}</th>
-                            <th>{{__('Veh. User')}}</th>
+                            <th>{{__('Title')}}</th>
+                            <th>{{__('Acquired Date')}}</th>
+                            <th>{{__('Expiry Date')}}</th>
+                            <th>{{__('Vehicle Reg No')}}</th>
+                            <th>{{__('Brand')}}</th>
+                            <th>{{__('Cost')}}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($assignments->take(5) as $value)
+                        @foreach ($documents as $value)
                         <tr>
-                            <td>{{date('d M Y', strtotime($value->assignment_date))}}</td>
-                            <td>{{ $value->vehicle->reg_number}}</td>
-                            <td>{{$value->vehicleuser['full_name']}}</td>
+                            <td>{{ $value->title }}</td>
+                           <td>{{date('d M Y', strtotime($value->acquired_date))}}</td>
+                            <td>{{date('d M Y', strtotime($value->expiry_date))}}</td>
+                            <td>{{ $value->vehicle->reg_number}}</td> 
+                            <td>{{ $value->vehicle->manufacturer}} {{ $value->vehicle->model}}</td>
+                            <td>{{ $value->cost }}</td></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -88,7 +95,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    @else
+hhsdhdsjhsjh
+</table>
+    @endif
+   {{--  <div class="col-md-4">
         <div class="box box-success single-latest">
             <div class="box-header with-border">
                 <h4 style="color: red;">{{__('Recent Accidents')}}</h4>
@@ -144,5 +155,5 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>

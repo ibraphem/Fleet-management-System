@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\document;
+use App\VehiclePaper;
 use Illuminate\Http\Request;
 use App\Vehicle;
 use App\Vehicleuser;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+
 
 class DocumentController extends Controller
 {
@@ -29,7 +31,7 @@ class DocumentController extends Controller
 
     public function index()
     {
-        $documents = Document::with('vehicle','vehicleuser')->latest()->get();
+        $documents = Document::with('vehicle','vehicleuser', 'vehiclepaper')->latest()->get();
         return view('document.index', compact('documents')); 
     }
 
@@ -41,8 +43,9 @@ class DocumentController extends Controller
     public function create()
     {
         $vehicle_users = Vehicleuser::all();
+        $vehicle_papers = VehiclePaper::all();
         $vehicles = Vehicle::all();
-        return view('document.edit', compact('vehicle_users', 'vehicles'));
+        return view('document.edit', compact('vehicle_users', 'vehicles', 'vehicle_papers'));
     }
 
     /**
@@ -57,7 +60,7 @@ class DocumentController extends Controller
         $document = new Document();
         $document->vehicle_id = $request->vehicle_id;
         $document->vehicle_user_id = $request->vehicle_user_id;
-        $document->title = $request->title;
+        $document->vehicle_paper_id = $request->vehicle_paper_id;
         $document->acquired_date = $request->acquired_date;
         $document->expiry_date = $request->expiry_date;
         $document->cost = $request->cost;
@@ -74,6 +77,7 @@ class DocumentController extends Controller
             return redirect('document');
             }else{
                 Session::flash('message', __('This vehicle was not assigned to the user you chose'));
+                Session::flash('alert-class', 'alert-danger');
                 return redirect()->back();
             }
     }
@@ -100,8 +104,11 @@ class DocumentController extends Controller
         $document = Document::findOrFail($id);
         //dd($document);
         $vehicle_users = Vehicleuser::all();
+        $vehicle_papers = VehiclePaper::all();
         $vehicles = Vehicle::all();
-       return view('document.edit', compact('document', 'vehicle_users', 'vehicles'));
+       return view('document.edit', compact('document', 'vehicle_users', 'vehicles', 'vehicle_papers'));
+
+       
     }
 
     /**
@@ -114,13 +121,15 @@ class DocumentController extends Controller
     public function update(Request $request, $id)
     {
         $this->validator($request->all())->validate();
-        $document = new Document();
+        $document = Document::findOrFail($id);
         $document->vehicle_id = $request->vehicle_id;
         $document->vehicle_user_id = $request->vehicle_user_id;
-        $document->title = $request->title;
+        $document->vehicle_paper_id = $request->vehicle_paper_id;
         $document->acquired_date = $request->acquired_date;
         $document->expiry_date = $request->expiry_date;
         $document->cost = $request->cost;
+
+     //   dd($document);
 
         $vehicle_assigned = Assignment::where('vehicle_id', $request->vehicle_id)->exists();
         

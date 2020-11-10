@@ -16,22 +16,28 @@
 				
 					<!-- latest section -->
                     <div class="row">
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="purple well">
 								<i class="fa fa-users" aria-hidden="true"></i><br>
 								<span>{{trans('Vehicle Users')}} : {{$vehicleusers}}</span>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="chocolate well">
 								<i class="fa fa-car" aria-hidden="true"></i><br>
-								<span>{{trans('Vehicles')}} : {{$vehicles}}</span>
+								<span>{{trans('Total Vehicles')}} : {{$vehicles}}</span>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="well yellow">
 								<i class="fa fa-shield" aria-hidden="true"></i><br>
 								<span>{{trans('Accidents')}} : {{$accidentals}}</span>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="well blue">
+								<i class="fa fa-car" aria-hidden="true"></i><br>
+								<span>{{trans('Unallocated Vehicles')}} : {{$unallocated_vehicles}}</span>
 							</div>
 						</div>
 					</div>

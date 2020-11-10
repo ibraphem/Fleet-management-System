@@ -1,7 +1,7 @@
 
 <table class="table table-striped table-bordered list-of-vehicles overflow-auto" id="list-vehicle-report">
     <thead>
-    <tr>
+    <tr class="trow">
     <td>{{trans('Acquired Date')}}</td>
         <td>{{trans('Reg Number')}}</td>
         <td>{{trans('Brand')}}</td>
@@ -14,7 +14,7 @@
         <tbody class="list-vehicle-report">
 
         @foreach($vehicleReport as $value)
-            <tr>
+            <tr class="trow">
                 <td>{{ $value->acquired_date }}</td>
                 <td>{{ $value->reg_number }}</td>
                 <td>{{ $value->manufacturer }} &nbsp; {{ $value->model }} &nbsp {{ $value->model_year }}</td>

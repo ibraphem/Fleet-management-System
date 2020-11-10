@@ -56,7 +56,13 @@ class VehicleUserController extends Controller
         $this->validator($request->all())->validate();
         // store
         $vehicleusers = new Vehicleuser;
-        $vehicleusers->saveVehicleUser($request->all());
+        $vehicleuser_exist = Vehicleuser::where('full_name', $request->full_name)->exists();
+        if($vehicleuser_exist){
+            Session::flash('message', __('This vehicle user already exist'));
+            Session::flash('alert-class', 'alert-danger');
+            return Redirect()->back();
+        } else{
+            $vehicleusers->saveVehicleUser($request->all());
 
         // process image
         $image = $request->file('avatar');
@@ -65,6 +71,8 @@ class VehicleUserController extends Controller
         }
         Session::flash('message', __('You have successfully added a vehicle user'));
         return Redirect()->back();
+        }
+        
     }
 
     /**
@@ -73,14 +81,14 @@ class VehicleUserController extends Controller
      * @param  \App\Vehicleuser  $vehicleuser
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) 
     {   
         
         $vehicle_user = Vehicleuser::findOrFail($id);
         $milleages = Milleage::where('vehicle_user_id', $id)->get();
         $assignments = Assignment::where('vehicle_user_id', $id)->get();
         $fuels = Fuel::where('vehicle_user_id', $id)->get();
-        return view('vehicleuser.show', compact('vehicle_user', 'milleages', 'assignments', 'fuels'));
+        return view('vehicleuser.show', compact('vehicle_user', 'milleages', 'assignments', 'fuels')); 
     }
 
     /**

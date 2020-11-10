@@ -63,26 +63,36 @@ class GeneralreportController extends Controller
 
     public function getGeneralReport(Request $request)
     {
-        //dd("nonsense");
-        if ($request->ajax()) {
-            //dd("nonsense");
+ 
             $generalReport = Assignment::where('status', '=', "active")->with('vehicle','vehicleuser', 'accident', 'document', 'milleage')->get();
-           // dd($generalReport);
-           // $generalReport = $generalReport->where('created_at', '>=', $request->DateCreated);
-           //  $generalReport = $generalReport->where('created_at', '<=', $request->EndDate)->get();
-            //dd($generalReport);
-            $DateCreated = $request->DateCreated;
-            $EndDate = $request->EndDate;
-
-          //  $document = "whereBetween('acquired_date', array(" . $DateCreated . "," . $EndDate . "))->sum('cost')";
-          //  dd($document);
-           // return view('report.listsgeneral')->with('generalReport', $generalReport);
            
-           if($DateCreated != null && $DateCreated != "" && $EndDate != null && $EndDate != "") {
-        return view('report.listsgeneral', compact('generalReport', 'DateCreated', 'EndDate'));
+            $DateCreated = $request->from;
+            $EndDate = $request->to;
+            $company = $request->company;
+         //   dd($company);
 
-        }
-        }
+
+            $month_start = date("m",strtotime($DateCreated));
+            $month_end = date("m",strtotime($EndDate));
+            $year_start = date("Y",strtotime($DateCreated));
+            $year_end = date("Y",strtotime($EndDate));
+
+
+            if($DateCreated != null && $DateCreated != "" && $EndDate != null && $EndDate != "") {
+                if($month_start == $month_end && $year_start == $year_end) {
+                    
+                        return view('report.listsgeneral', compact('generalReport', 'month_start', 'year_start', 'DateCreated', 'EndDate', 'company'));
+            
+                    
+                } else {
+                    echo "<h3 style='text-align:center; color:red'>Only monthly report can be generated, ensure that date range is between a month</h3>";
+                }
+            }
+
+    
+           
+         
+        
     }
 
     /**

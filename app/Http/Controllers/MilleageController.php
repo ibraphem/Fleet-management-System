@@ -109,7 +109,8 @@ class MilleageController extends Controller
                                     ->count();
 
           if($milleage_date > 0){
-            Session::flash('message', __('You have already recorded milleage for this vehicle this month'));
+            Session::flash('message', __('You have already recorded this vehicle mileage for the month you chose'));
+            Session::flash('alert-class', 'alert-danger');
             return redirect()->back();
           }                  
         
@@ -120,10 +121,11 @@ class MilleageController extends Controller
         //dd($vehicle_assigned_count);
         if($vehicle_assigned_count > 0){
         $milleage->save();
-        Session::flash('message', __('Milleage recorded successfully'));
+        Session::flash('message', __('Mileage recorded successfully'));
         return redirect('milleage');
         }else{
             Session::flash('message', __('This vehicle was not assigned to the user you chose'));
+            Session::flash('alert-class', 'alert-danger');
             return redirect()->back();
             die();
         }
@@ -198,6 +200,7 @@ class MilleageController extends Controller
         return redirect('milleage');
         }else{
         Session::flash('message', __('This vehicle was not assigned to the user you chose'));
+        Session::flash('alert-class', 'alert-danger');
         return redirect()->back();
         }
       

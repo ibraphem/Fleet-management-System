@@ -22,7 +22,7 @@
             @endif
           <div class="box box-success">
             <div class="box-header">
-              <h3 class="box-title">{{__('Assignment List')}}</h3><a class="btn btn-small btn-success pull-right" href="{{ URL::to('assignment/create') }}"><i class="fa fa-plus"></i>&nbsp; {{__('Assign Vehicle')}}</a>
+              <h3 class="box-title">{{__('Withdrawal List')}}</h3>
             </div>
           </div>
             <!-- /.box-header -->

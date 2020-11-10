@@ -14,9 +14,13 @@
         <img src="{{asset('images/fpos.png')}}" alt="" height="70px">
         @endif
 
+        
+
     </a>
-  </div><br><br>
-  <b><p class="login-box-msg" style="color:green">{{__('Sign in to start your session')}}</p></b>
+  </div><br>
+  <h4 style="color:green; font-weight:bold" class="login-box-msg">FLEET MANAGEMENT SYSTEM</h4><br>
+  {{--   <p ><b>Email:</b> &nbsp; ibrahim@webdev.com</p>
+	<p ><b>Password:</b> password</p><br> --}}
 	@if (count($errors) > 0)
 		<div class="alert alert-danger">
 		<strong>Whoops!</strong> {{__('There were some problems with your input.')}}<br><br>

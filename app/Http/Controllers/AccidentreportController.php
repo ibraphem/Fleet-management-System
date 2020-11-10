@@ -36,7 +36,7 @@ class AccidentreportController extends Controller
     {
         //
     }
-
+ 
     public function getAccident()
     {
         $accidentReport = Accident::pluck('created_at');
@@ -46,14 +46,27 @@ class AccidentreportController extends Controller
 
     public function getAccidentReport(Request $request)
     {
-        //dd("nonsense");
-        if ($request->ajax()) {
-           // dd("nonsense");
-            $accidentReport = Accident::where('accident_date', '>=', $request->DateCreated);
-            $accidentReport = $accidentReport->where('accident_date', '<=', $request->EndDate)->get();
-            //dd($accidentReport);
-            return view('report.listsaccident')->with('accidentReport', $accidentReport); 
-        }
+//dd($request->company);
+        $from = $request->from;
+        $to = $request->to;
+        $company = $request->company;
+         $accidents = DB::table('accidents')
+        ->join('vehicles', 'accidents.vehicle_id', '=', 'vehicles.id')
+        ->where('vehicles.location', $request->company)
+        ->whereBetween('accidents.accident_date', array($request->from, $request->to))
+        
+        ->select('accidents.*', 'vehicles.*')
+        ->get();
+
+       // dd($accidents);
+
+     
+
+        return view('report.listsaccident')
+        ->with('accidents', $accidents)
+        ->with('from', $from)
+        ->with('to', $to)
+        ->with('company', $company);  
     }
 
     /**

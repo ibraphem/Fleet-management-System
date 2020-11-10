@@ -73,7 +73,8 @@ class AssignmentController extends Controller
    
         $vehicle_assigned = Assignment::where('vehicle_id', $request->vehicle_id)->exists();
         if($vehicle_assigned || $assignment->status == "active"){
-            Session::flash('message', __('Vehicle is already assigned to another user'));
+            Session::flash('message', __('Vehicle was already assigned to another user'));
+            Session::flash('alert-class', 'alert-danger');
             return redirect()->back();
         } else{
         $assignment->save();
@@ -140,6 +141,7 @@ class AssignmentController extends Controller
         $vehicle_assigned = Assignment::where('vehicle_id', $request->vehicle_id)->exists();
         if($vehicle_assigned || $assignment->status == "active"){
             Session::flash('message', __('Vehicle is already assigned to another user'));
+            Session::flash('alert-class', 'alert-danger');
             return redirect()->back();
         } else{
         $assignment->update();

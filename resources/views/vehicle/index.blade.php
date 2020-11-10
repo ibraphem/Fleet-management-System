@@ -26,12 +26,14 @@
                 <thead>
                     <tr>
                         <th>Reg. Number</th>
+                        <th>Asset ID</th>
+                       
                         <th>Manufacturer</th>
                         <th>Model</th>
                         <th>Model Year</th>
                         <th>Acquired date</th>
                         <th>Purchase Price</th>
-                        <th>OPS Status</th>
+                        <th>Company</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -39,19 +41,25 @@
     @foreach($vehicle as $value) 
         <tr>
           <td>{{ $value->reg_number }}</td>
+          <td>{{ $value->assetid }}</td>
+          
           <td>{{ $value->manufacturer }}</td>
           <td>{{ $value->model }}</td>
           <td>{{ $value->model_year }}</td>
+          @if(!empty($value->acquired_date) && $value->acquired_date != null)
           <td>{{date('d M Y', strtotime($value->acquired_date))}}</td>
+          @else
+          <td>&nbsp;</td>
+          @endif
           <td>&#8358; {{ $value->purchase_price }}</td>
-          <td>{{ $value->condition }}</td>
+          <td>{{ $value->location }}</td>
           <td class="item_btn_group">
           <a href="{{ url('vehicles/' . $value->id . '/') }}"><button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="View vehicle info."><i class="fa fa-eye"></i></button></a> &nbsp;
           <a href="{{ url('vehicles/' . $value->id . '/edit') }}"><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="top" title="Edit Vehicle"></span></button></a> &nbsp;
-          <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Vehicle">{{ Form::open(array('url' => 'vehicles/' . $value->id, 'class' => 'form-inline')) }}
+       {{--  <a href="#" class="delete-form" onclick="return confirm('are you sure?')"><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Vehicle">{{ Form::open(array('url' => 'vehicles/' . $value->id, 'class' => 'form-inline')) }}
                   {{ Form::hidden('_method', 'DELETE') }}
                   {{ Form::submit(trans('X'), array('class' => 'delete-btn')) }}
-                  {{ Form::close() }}</button></a>
+                  {{ Form::close() }}</button></a>--}} 
           </td>
           
             

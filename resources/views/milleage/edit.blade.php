@@ -38,10 +38,10 @@
 					{{ Form::open(array('url' => 'milleage', 'files' => true,)) }}
 				@endif
 				<div class="col-md-6" >
-        <div class="form-group row">
-					{{ Form::label('date', __('Date') .' *',['class'=>'col-sm-3 text-right']) }}
+        <div class="form-group row"> 
+					{{ Form::label('date', __('Milleage Month') .' *',['class'=>'col-sm-3 text-right']) }}
 					<div class="col-sm-9"> 
-						{{ Form::date('Date', null, array('class' => 'form-control', 'placeholder' => "Record milleage for the month", 'required')) }}
+						{{ Form::date('date', null, array('class' => 'form-control', 'placeholder' => "Record milleage for the month", 'required')) }}
 					</div>
 					</div> 
 

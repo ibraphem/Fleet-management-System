@@ -38,12 +38,22 @@
 					{{ Form::open(array('url' => 'document', 'files' => true,)) }}
 				@endif
 				<div class="col-md-6" >
-                <div class="form-group row">
-					{{ Form::label('title', __('Title') .' *',['class'=>'col-sm-3 text-right']) }}
-					<div class="col-sm-9"> 
-						{{ Form::text('title', null, array('class' => 'form-control', 'required')) }}
-					</div>
-					</div> <br>
+        <div class="form-group">
+            <label for="Parts" class="col-sm-3 control-label">{{trans('Vehicle Paper')}} *</label>
+            <div class="col-sm-7 no-margin no-right-padding">
+        <select class="form-control select2" name="vehicle_paper_id" required>
+            <option value="">{{__('Select Vehicle Paper')}}</option>
+                @foreach($vehicle_papers as $vehicle_paper)
+                <option value="{{$vehicle_paper->id}}">{{$vehicle_paper->title}}<option>
+            
+                @endforeach
+            </select>
+        
+            </div>
+            <div class="col-sm-2 no-margin no-left-padding">
+      <a class="btn btn-success pull-right" href="{{url('vehicle_paper')}}/#modal-id" data-toggle="modal"><i class="fa fa-plus"></i>&nbsp; {{__('Add')}}</a>
+</div>
+      </div> <br><br>
 
                      
 				<div class="form-group">
@@ -52,7 +62,8 @@
                 <select class="form-control select2" name="vehicle_id" required>
                     <option value="">{{__('Select Vehicle')}}</option>
                         @foreach($vehicles as $vehicle)
-                    <option value="{{$vehicle->id}}" {{($vehicle->id) ? 'selected': ''}}>{{$vehicle->reg_number}}</option>
+                        <option value="{{$vehicle->id}}">{{$vehicle->reg_number}}<option>
+                    
                         @endforeach
                     </select>
                 
@@ -114,6 +125,32 @@
     </section>
     <!-- /.content -->
   </div>
+  <div class="modal fade" id="modal-id">
+	<div class="modal-dialog">
+		{{ Form::open(['route' => 'vehiclepaper.store', 'method' => 'post']) }}
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">{{__('Add Vehicle Paper')}}</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					{{ Form::label('Title', __('Title *')) }}
+					{{ Form::text('title', null, array('class' => 'form-control', 'required')) }}
+				</div>
+				<div class="form-group">
+					{{ Form::label('description', __('Description')) }}
+					{{ Form::textarea('description', null, array('class' => 'form-control')) }}
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
+				<button type="submit" class="btn btn-success">{{__('Create')}}</button>
+			</div>
+		</div>
+		{{ Form::close() }}
+	</div>
+</div>
 @endsection
 @section('script')
     <script type="text/javascript" src="{{asset('js/angular.min.js')}}"></script>

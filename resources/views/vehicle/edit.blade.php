@@ -41,6 +41,13 @@
 					</div>
 
 					<div class="form-group row">
+					{{ Form::label('assetid', trans('Asset ID') .' *',['class'=>'col-sm-3 text-right']) }}
+					<div class="col-sm-9"> 
+						{{ Form::text('assetid', null, array('class' => 'form-control', 'required')) }}
+					</div>
+					</div>
+
+					<div class="form-group row">
 					{{ Form::label('manufacturer', trans('Manufacturer') .' *',['class'=>'col-sm-3 text-right']) }}
 						<div class="col-sm-9">
 							{{ Form::text('manufacturer', null, array('class' => 'form-control', 'required')) }}
@@ -62,11 +69,20 @@
 					</div>
 
 					<div class="form-group row">
-					{{ Form::label('acquired_date', trans('Acquired date') .' *',['class'=>'col-sm-3 text-right']) }}
-					<div class="col-sm-9"> 
-					{{ Form::date('acquired_date', null, array('class' => 'form-control')), 'required' }}
+					{{ Form::label('engine_number', trans('Engine Number') .' *', ['class'=>'col-sm-3 text-right']) }}
+						<div class="col-sm-9"> 
+					{{ Form::text('engine_number', null, array('class' => 'form-control', 'required')) }}
+						</div>
 					</div>
+
+					<div class="form-group row">
+					{{ Form::label('chassis_number', trans('Chassis Number'),['class'=>'col-sm-3 text-right']) }}
+						<div class="col-sm-9"> 
+					{{ Form::text('chassis_number', null, array('class' => 'form-control')) }}
+						</div>
 					</div>
+
+					
 					
 				<!--	<div class="form-group row">
 						{{ Form::label('company', trans('Company'),['class'=>'col-sm-3 text-right']) }}
@@ -76,6 +92,20 @@
 					</div> -->
 				</div>
 				<div class="col-sm-6">
+
+				<div class="form-group row">
+					{{ Form::label('colour', trans('Colour'), ['class'=>'col-sm-3 text-right']) }}
+						<div class="col-sm-9"> 
+					{{ Form::text('colour', null, array('class' => 'form-control', )) }}
+						</div>
+					</div>
+
+				<div class="form-group row">
+					{{ Form::label('acquired_date', trans('Acquired date') .' *',['class'=>'col-sm-3 text-right']) }}
+					<div class="col-sm-9"> 
+					{{ Form::date('acquired_date', null, array('class' => 'form-control')), 'required' }}
+					</div>
+					</div>
 				
 				<div class="form-group row">
 						{{ Form::label('purchase_price', trans('Purchase Price'),['class'=>'col-sm-3 text-right']) }}
@@ -98,14 +128,22 @@
 					</div> -->
 
 					<div class="form-group row">
+					{{ Form::label('location', __('Company') .' *',['class'=>'col-sm-3 text-right']) }}
+					<div class="col-sm-9"> 
+						 {{ Form::radio('location', 'Overland', true) }} Overland &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        {{ Form::radio('location', 'Landover', false) }} Landover
+					</div>
+					</div>
+
+				<!--	<div class="form-group row">
 						{{ Form::label('location', trans('Location') .' *',['class'=>'col-sm-3 text-right']) }}
 						<div class="col-sm-9"> 
 						{{ Form::text('location', null, array('class' => 'form-control')) }}
 						</div>
-					</div>
+					</div> -->
 
 					<div class="form-group row">
-						{{ Form::label('condition', trans('Condition'),['class'=>'col-sm-3 text-right']) }}
+						{{ Form::label('condition', trans('Ops Status'),['class'=>'col-sm-3 text-right']) }}
 						<div class="col-sm-9"> 
 						{{ Form::text('condition', null, array('class' => 'form-control')) }}
 						</div>

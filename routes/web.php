@@ -35,12 +35,17 @@ Route::group(['middleware' => 'languange'], function () {
     Route::resource('customerpayments', 'CustomerPaymentController');
 
     Route::resource('vehicles', 'VehicleController');
+    Route::match(['post'], '/vehicle/report', 'MaintenanceController@report')->name('vehicle.report');
+    Route::match(['post'], '/report/getexpense', 'MaintenanceController@getExpense')->name('report.getexpense');
+    Route::match(['post'], '/expense/report', 'MaintenanceController@expense')->name('expense.report');
 
     Route::resource('vehicleusers', 'VehicleUserController');
     Route::match(['post'], 'vehicleusers/{$id}', 'VehicleUserController@show');
 
     Route::resource('maintenance', 'MaintenanceController');
+    Route::get('/maint', 'MaintenanceController@maint')->name('fetch.maint');
     Route::resource('maintenanceroutine', 'MaintenanceRoutineController');
+    Route::match(['post'], 'maintenanceroutine/{$id}', 'MaintenanceRoutineController@show');
 
     Route::resource('schedulemaintenance', 'ScheduleMaintenanceController');
     Route::match(['post'], 'schedulemaintenance/complete', 'SchedulemaintenanceController@complete')->name('schedulemaintenance.complete');
@@ -53,16 +58,16 @@ Route::group(['middleware' => 'languange'], function () {
     Route::match(['post'], 'milleage/costchange', 'milleageController@costchange')->name('milleage.costchange');
 
     Route::get('reports/getvehicle', 'VehiclereportController@getVehicle')->name('reports.printvehicles');
-    Route::get('reports/getvehiclereport', 'VehicleReportController@getVehicleReport')->name('reports.getvehiclereport');
+    Route::match(['post'], '/reports/vehicle', 'VehiclereportController@getVehicleReport')->name('report.vehicle');
 
     Route::get('reports/getaccident', 'AccidentreportController@getAccident')->name('reports.printaccidents');
-    Route::get('reports/getaccidentreport', 'AccidentReportController@getAccidentReport')->name('reports.getaccidentreport');
+    Route::match(['post'], '/reports/accident', 'AccidentreportController@getAccidentReport')->name('report.accident');
 
     Route::get('reports/getmaintenance', 'MaintenancereportController@getMaintenance')->name('reports.printmaintenances');
-    Route::get('reports/getmaintenancereport', 'MaintenanceReportController@getMaintenanceReport')->name('reports.getmaintenancereport');
+    Route::match(['post'], '/reports/maintenance', 'MaintenancereportController@getMaintenanceReport')->name('report.maintenance');
 
     Route::get('reports/generalreport', 'GeneralreportController@getGeneral')->name('reports.printgenerals');
-    Route::get('reports/getgeneralreports', 'GeneralreportController@getgeneralReport')->name('reports.getgeneralreports');
+    Route::match(['post'], '/reports/general', 'GeneralreportController@getGeneralReport')->name('report.general');
 
     Route::resource('accident', 'AccidentController');
     Route::get('accident/{id}/{vehicle_id}', 'AccidentController@show')->name('accident.show');;
@@ -70,6 +75,8 @@ Route::group(['middleware' => 'languange'], function () {
     Route::resource('fuel', 'FuelController');
 
     Route::resource('document', 'DocumentController');
+    Route::resource('vehiclepaper', 'VehiclePaperController');
+    Route::match(['post'], 'vehiclepaper/{$id}', 'VehiclePaperController@show');
    
    
 });

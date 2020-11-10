@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\vehiclereport;
-use App\Accident;
-use App\Maintenance;
 use Illuminate\Http\Request;
 use App\Vehicle;
 use \Auth, \Redirect;
@@ -24,33 +22,34 @@ class vehiclereportController extends Controller
      */
     public function index()
     {
-        $vehiclesReport = Vehicle::latest()->paginate('10');
-
-
-        return view('reports.vehicle')->with('vehiclesReport', $vehiclesReport);
+       
     }
 
     public function getVehicle()
     {
         $vehicleReport = Vehicle::pluck('created_at');
-        //dd($vehicleReport);
         return view('report.getvehicle')->with('vehicleReport', $vehicleReport);
     }
 
     public function getVehicleReport(Request $request)
     {
-        //dd('nonsense');
-        if ($request->ajax()) {
-            //dd('nonsense');
-            //dd($request->EndDate);
-            $accident = Accident::all();
-            $maintenance = Maintenance::all();
-            $vehicleReport = Vehicle::with('accident', 'maintenance')->where('acquired_date', '>=', $request->DateCreated);
-            $vehicleReport = $vehicleReport->where('acquired_date', '<=', $request->EndDate)->get();
-           // $vehicleReport = Vehicle::all()->whereBetween('created_at', [ $request->DateCreated.' 00:00:00', $request->EndDate.' 23:59:59'])->get();
-          //  dd($vehicleReport);
-            return view('report.listsvehicle')->with('vehicleReport', $vehicleReport); 
-        }
+           // dd($request->company);
+            $from = $request->from;
+            $to = $request->to;
+            $company = $request->company;
+            $vehicleReport = Vehicle::where('acquired_date', '>=', $request->from);
+            $vehicleReport = $vehicleReport->where('acquired_date', '<=', $request->to);
+            $vehicleReport = $vehicleReport->where('location', '=', $request->company);
+            
+            $vehicleReport = $vehicleReport->orderBy('acquired_date', 'ASC')->get();
+        
+        
+            return view('report.listsvehicle')
+            ->with('vehicleReport', $vehicleReport )
+            ->with('from', $from)
+            ->with('to', $to)
+            ->with('company', $company); 
+       
     }
 
     /**
